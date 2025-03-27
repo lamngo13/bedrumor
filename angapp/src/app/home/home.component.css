@@ -28,7 +28,6 @@ body, html {
   border: none;
   font-size: 2rem; /* Scales with viewport */
   color: white;
-  cursor: pointer;
   margin: 0;
   padding: 0;
   line-height: 1; /* Remove extra space above/below text */
@@ -191,7 +190,6 @@ body, html {
   animation: rainbow_animation 6s ease-in-out infinite;
   background-size: 400% 100%;
   font-size: 2rem;
-  cursor: pointer;
   margin: 0 10px;
   padding: 0;
   line-height: .0001;
