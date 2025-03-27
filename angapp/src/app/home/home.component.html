@@ -1,10 +1,29 @@
-<div (mousemove)="onMouseMove($event)">
-  <img
-    [src]="imageSrc"
-    [ngStyle]="{ top: gifPosition.y + 'px', left: gifPosition.x + 'px' }"
-    class="cursor-follow-gif"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bedrumor</title>
+  <style>
+    HTML, BODY {
+      cursor: url("https://downloads.totallyfreecursors.com/cursor_files/guitarpink.ani"), 
+             url("https://downloads.totallyfreecursors.com/thumbnails/guitarpink.gif"), auto;
+    }
+    .cursor-follow-gif {
+      position: absolute;
+      pointer-events: none;
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+</head>
+<body (mousemove)="onMouseMove($event)">
+  <img 
+    [src]="imageSrc" 
+    [ngStyle]="{ top: gifPosition.y + 'px', left: gifPosition.x + 'px' }" 
+    class="cursor-follow-gif" 
   />
-  
+
   <div class="page-container">
     <!-- Header -->
     <header class="sticky-header">
@@ -28,7 +47,7 @@
         </iframe>
       </div>
     </div>
-  
+
     <!-- Socials -->
     <div class="socials-container">
       <h1 class="rainbow_text_animated">Check out our socials</h1>
@@ -38,7 +57,7 @@
         <a href="https://www.instagram.com/bedrumor/" target="_blank">SoundCloud</a>
       </div>
     </div>
-  
+
     <!-- Events -->
     <div class="upcoming-events-container">
       <h1 class="rainbow_text_animated">Come see us play!</h1>
@@ -62,4 +81,5 @@
   <div class="todo">
     <h1>maybe a lil mini gallery or something?</h1>
   </div>
-</div>
+</body>
+</html>
