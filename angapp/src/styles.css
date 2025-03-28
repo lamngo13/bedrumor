@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 /*  html { background-color: #494b57; }   */
+
+@font-face {
+    font-family: 'gentle';  /* Custom name */
+    src: url('assets/fonts/gentle-font.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply it to elements */
+body {
+    font-family: 'gentle', sans-serif;
+    background-color: #e6b3e6;
+}

@@ -5,18 +5,6 @@
   box-sizing: border-box;
 }
 
-/* :host {
-  display: block;
-  background-color: rgb(5, 14, 88);
-  color: white; 
-  z-index: -10;
-  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-} */
-
 body, html {
   font-family: 'Times New Roman', serif;
   overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -25,97 +13,131 @@ body, html {
 /* Header */
 .sticky-header {
   position: fixed;
-  top: 0; /* Fixes header to the top */
+  top: 0;
   width: 100%;
-  height: 10%;
-  background-color: black;
+  height: 10vh; /* Adjusted from absolute height */
   color: white;
   display: flex;
   justify-content: center;
-  padding: 0;
   z-index: 5;
 }
 
 .menu-button {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 2rem; /* Scales with viewport */
   color: white;
-  cursor: pointer;
   margin: 0;
   padding: 0;
   line-height: 1; /* Remove extra space above/below text */
-  display: inline-block; /* Ensure button only wraps the text */
+  display: inline-block;
 }
 
 .menu-button:hover {
-  color: #85C1E9; /* Subtle hover effect */
-  color: rgb(224, 24, 158)
+  color: rgb(224, 24, 158); /* Subtle hover effect */
+}
+
+.page-container {
+  background: 
+  url("../../assets/img/logopt2.png") no-repeat left -5% top 25%;
+
+  background-size: 50%;
 }
 
 .title-video-container {
-  display: flex; /* Align items horizontally */
-  justify-content: space-between; /* Add space between logo and video */
-  align-items: center; /* Vertically center items */
-  flex-wrap: wrap; /* Ensure responsiveness */
-  margin: 20px auto;
-  width: 90%;
-  max-width: 1200px;
-  height: 85vh; /* Utilize more vertical space */
-  gap: 20px;
-  position: relative; /* For title positioning */
-  padding-top: 200px; /* Adjust for title height TODO TAKE THIS OUT UNITS */
-}
-
-.title {
-  position: absolute;
-  top: -40px; /* Position above the logo and video */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  color: black; /* Adjust for visibility */
-}
-
-.title-logo {
-  flex: 1; /* Smaller portion for the logo */
-  text-align: center;
-  height: 80%; /* Allow the logo to grow vertically */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  max-height: 80%;
-  max-width: 80%;
-  width: 80%;
-  z-index: -2;
+  flex-wrap: wrap;
+  margin: 5vh auto; 
+  width: 90%;
+  min-height: 85vh; /* Utilize more vertical space */
+  gap: 1.5vh; /* Adjusted from 20px */
   position: relative;
 }
 
-.video-container {
-  flex: 2; /* Larger portion for the video */
-  max-width: 800px; /* Allow more space for the video */
-  height: 80%; /* Increase vertical size */
+.title-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: bold;
+  color: rgb(121, 55, 115);
+  margin-right: 32%;
+}
+
+.teal-btrfly {
+  padding-top: 40px;
+  width: auto;
+  height: 90px;
+}
+
+.video-container {
+  width: 93%; /* Allow more space for the video */
+  height: 100%;
 }
 
 .video-container iframe {
+  width: 600px; 
+  height: 400px;
+  float: right;
+}
+
+.mother-hands-title {
+  text-align: right;
+  padding-right: 15%;
+  padding-top: 10px;
+  font-size: 2rem;
+  font-weight: lighter;
+  color: rgb(121, 55, 115);
+}
+
+.about-title {
+  text-align: right;
+  padding-right: 24%;
+  padding-top: 10px;
+  font-size: 2rem;
+  font-weight: lighter;
+  color: rgb(121, 55, 115);
+}
+
+.bio-text {
   width: 100%;
-  height: 100%; /* Allow the video to grow */
+}
+
+.bio-text p {
+  width: 53%; 
+  float: right;
+  border: #dd99da;
+  border-style: groove;
+  border-width: 20px;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.divider-butterfly {
+  text-align: right;
+  margin: 5vh auto; 
+  padding-right: 6%;
+}
+
+.butterfly-div {
+  height: 60px;
+  width: 700px;
 }
 
 /* Socials */
 .socials-container {
-  text-align: center;
-  margin: 30px auto;
+  text-align: right;
+  margin: 3vh auto; 
+  padding-right: 20%;
 }
 
 .socials-links a {
   color: #85C1E9;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 1vw; /* Adjusted from 10px */
   font-size: 1.2rem;
 }
 
@@ -126,31 +148,29 @@ body, html {
 /* Events */
 .upcoming-events-container {
   text-align: center;
-  margin: 30px auto;
+  margin: 3vh auto; /* Adjusted from 30px */
+  padding-left: 38%;
 }
 
 .calendar iframe {
   max-width: 100%;
-  height: 500px; /* Adjust height for small screens */
+  height: 50vh; /* Adjusted from 500px */
 }
 
 /* Cursor Follow GIF */
 .cursor-follow-gif {
   position: absolute;
   pointer-events: none;
-  width: 50px;
-  height: 50px;
+  width: 3.5vw; /* Adjusted from 50px */
+  height: 3.5vw; /* Maintain square aspect ratio */
   transition: top 0.1s, left 0.1s;
 }
+
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
   .menu-button {
     font-size: 1rem;
-  }
-
-  .logo-image {
-    max-width: 90%;
   }
 
   .video-container iframe {
@@ -161,7 +181,7 @@ body, html {
     flex-direction: column; /* Stack items vertically */
   }
 
-  .title-logo, .video-container {
+  .video-container {
     flex: unset;
     width: 100%; /* Take full width */
     max-width: none; /* Remove max width */
@@ -177,8 +197,6 @@ body, html {
     height: 400px; /* Reduce calendar height */
   }
 }
-
-
 
 .rainbow {
   text-align: center;
@@ -204,18 +222,9 @@ body, html {
   animation: rainbow_animation 6s ease-in-out infinite;
   background-size: 400% 100%;
   font-size: 2rem;
-  cursor: pointer;
   margin: 0 10px;
   padding: 0;
   line-height: .0001;
-}
-
-.logo-image {
-  display: block;
-  margin: 0 auto;
-  max-width: 200%;
-  padding-top: 5%;
-  z-index: -2;
 }
 
 @keyframes rainbow_animation {
