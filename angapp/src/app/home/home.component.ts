@@ -16,7 +16,7 @@ export class HomeComponent {
   smoothing_value = 0.04;
   cursorPosition = { x: 0, y: 0 };
   intervalId: any;
-  imageSrc = "../../assets/img/sadheart.png";
+  imageSrc = "assets/img/sadheart.png";
   happy_heart_distance = 100;
 
   constructor(private router: Router,
@@ -70,9 +70,9 @@ export class HomeComponent {
 
     //display sad or happy heart based on happy_heart_distance
     if (distance < this.happy_heart_distance) {
-      this.imageSrc = "../../assets/img/heart.png";
+      this.imageSrc = "assets/img/heart.png";
     } else {
-      this.imageSrc = "../../assets/img/sadheart.png";
+      this.imageSrc = "assets/img/sadheart.png";
   }
 }
 

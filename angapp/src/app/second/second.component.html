@@ -1,4 +1,25 @@
-<div class="gallery-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <style>
+    /* Set the pink fairy cursor globally for all elements */
+    HTML, BODY {
+      cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"), 
+             url("https://downloads.totallyfreecursors.com/thumbnails/fairypink3.gif"), auto;
+    }
+
+    /* Ensure buttons and other interactive elements also have the custom cursor when hovered */
+    button, a {
+      cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"), 
+             url("https://downloads.totallyfreecursors.com/thumbnails/fairypink3.gif"), auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
     <div class="gallery-header">
       <button class="home-button" (click)="goHome()">Home</button>
     </div>
@@ -10,4 +31,6 @@
       <button class="arrow right-arrow" (click)="nextImage()">&#10095;</button>
     </div>
   </div>
-  
+
+</body>
+</html>

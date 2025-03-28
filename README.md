@@ -1,12 +1,38 @@
 # deployment notes
-ng deploy --base-href='//son' --repo=https://github.com/lamngo13/son.git
 
-Index.html Base href=”/” for local development but for deployment otherwise
+for local development: in index.html -> href="/bedrumor/"
 
-End url: https://lamngo13.github.io/son/
+run the following command inside angapp:
 
-Problem is the page is blank
+I think gh readme is displaying this weird so I try inside quotes:
 
-THIS WORKS: ng deploy --base-href='//son' --repo=https://github.com/lamngo13/son.git In index.html: Base href=”/son/” https://lamngo13.github.io/son/
+"ng deploy --base-href='//bedrumor\' --repo=https://github.com/lamngo13/bedrumor.git"
+tldr is that there are two normal slashes before bedrumor and a single backslash after (no spaces) idk why gh readme isn't rendering lmao
 
-Deploying: https://github.com/angular-schule/angular-cli-ghpages#cname https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+
+ng deploy --base-href='//bedrumor\' --repo=https://github.com/lamngo13/bedrumor.git
+
+ALSO
+
+locally, assets (aka images) will have a ../../ preceding their filepath, but that will not be the case for deployment
+
+local: ../../assets/img/logopt2.png
+
+deployment: assets/img/logopt2.png
+
+
+Notes:
+
+DISPLAY BAR DOESNT SHOW UP UNTIL HOVERED (ON SAFARI*)
+
+
+-------------
+
+main is the branch for deployment
+
+
+dev is the optimal branch for tracking - but not w the tweaks for deployment
+
+-------------
+
+

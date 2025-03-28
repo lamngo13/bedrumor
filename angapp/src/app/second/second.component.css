@@ -41,7 +41,6 @@ html {
     text-align: center;
     padding: 10px 90px;
     border-radius: 5px;
-    cursor: pointer; 
     border: none;
     font-size: 2em;
   }
@@ -49,7 +48,6 @@ html {
   .home-button:hover {
     background-color: #000000;
     color: #85C1E9; 
-    cursor: pointer; /* Ensures the cursor remains a pointer on hover */
   }
   
   .gallery-content {
@@ -77,7 +75,6 @@ html {
     border: none;
     color: #fff;
     font-size: 2em;
-    cursor: pointer;
     padding: 10px;
   }
   
