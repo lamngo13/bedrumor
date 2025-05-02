@@ -81,9 +81,12 @@ export class HomeComponent {
     this.router.navigate(['/second']);
   }
 
+  // shop() {
+  //   console.log('shop');
+  //   this.router.navigate(['/shop']);
+  // }
   shop() {
-    console.log('shop');
-    this.router.navigate(['/shop']);
+    window.open('https://bedrumor.bandcamp.com/merch', '_blank');
   }
 
   game() {
