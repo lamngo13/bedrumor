@@ -106,7 +106,13 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "branch": "gh-pages",
+            "dir": "dist/angapp",
+            "cname": "bedrumor.com",
+            "message": "chore: deploy to gh-pages"
+          }
         }
       }
     }
