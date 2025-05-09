@@ -2,7 +2,7 @@
 
 for local development: in index.html -> href="/bedrumor/"
 
-run the following command inside angapp:
+run the following command inside bedrumor:
 
 I think gh readme is displaying this weird so I try inside quotes:
 
