@@ -49,7 +49,7 @@ Run the command ng deploy --base-href=’/’
 
 CLONE (however you want) gh-pages branch EXACTLY and manually change only the base href to be / (make sure you remember the cloned branch name with this change)
 
-Originally it was <base href="C:/Program Files/Git/"> but now it should be<base href="/">
+Originally it was base href="C:/Program Files/Git/" but now it should be base href="/"
 
 Go to github website settings > pages select the cloned-modified branch (root directory) and hit save (make sure to put in bedrumor.com in the custom domain)
 
