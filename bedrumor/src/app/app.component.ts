@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angapp';
+  title = 'bedrumor';
 
   constructor(private router: Router) {}
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angapp": {
+    "bedrumor": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angapp",
+            "outputPath": "dist/bedrumor",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angapp:build:production"
+              "buildTarget": "bedrumor:build:production"
             },
             "development": {
-              "buildTarget": "angapp:build:development"
+              "buildTarget": "bedrumor:build:development"
             }
           },
           "defaultConfiguration": "development"
