@@ -6,11 +6,11 @@ html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-color: #494b57;
-  }
+    /* background-color: #494b57; */
+  } 
   
   .gallery-container {
-    background-color: #494b57;
+    /*background-color: #494b57; */
     color: #fff;
     text-align: center;
     height: 100vh;
