@@ -36,8 +36,8 @@ html {
 }
   
   .home-button {
-    background-color: #494b57;
-    color: #85C1E9;
+    background-color: #e6b3e6;
+    color: rgb(121, 55, 115);
     text-align: center;
     padding: 10px 90px;
     border-radius: 5px;
@@ -46,8 +46,10 @@ html {
   }
   
   .home-button:hover {
-    background-color: #000000;
-    color: #85C1E9; 
+    /* background-color: #000000;   below is non-standard color*/
+    color: rgb(58, 1, 53);
+    font-weight: bold;
+    background-color: #e2dbe2;
   }
   
   .gallery-content {
