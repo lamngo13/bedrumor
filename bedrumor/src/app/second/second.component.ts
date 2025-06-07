@@ -11,19 +11,16 @@ import { ElementRef } from '@angular/core';
 export class SecondComponent {
 
   images = [
-    'assets/img/image0.jpeg',
-    'assets/img/image1.jpeg',
-    'assets/img/image3.jpeg',
-    'assets/img/image4.jpeg',
-    'assets/img/image5.jpeg',
-    'assets/img/image6.jpeg',
-    'assets/img/image7.jpeg',
-    'assets/img/IMG_1586.jpg',
-    'assets/img/IMG_1658.jpg',
-    'assets/img/IMG_1661.jpg',
-    'assets/img/IMG_2044.jpg',
-    'assets/img/IMG_2047.jpg',
-    'assets/img/howse.jpg',
+    'assets/img/unnamed (3).jpg',
+    'assets/img/unnamed (4).jpg',
+    'assets/img/unnamed (5).jpg',
+    'assets/img/unnamed (6).jpg',
+    'assets/img/unnamed (7).jpg',
+    'assets/img/unnamed (8).jpg',
+    'assets/img/unnamed (9).jpg',
+    'assets/img/unnamed (10).jpg',
+    'assets/img/unnamed (11).jpg',
+    'assets/img/unnamed (12).jpg',
   ]
   currentImage = 0;
   
