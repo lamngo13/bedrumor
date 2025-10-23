@@ -1,5 +1,19 @@
 # deployment notes
 
+OKAY IT WORKS BUT MANUALLY CHANGE BASE HREF TO BE / ON GH PAGES BRANCH
+Make code work normally
+Set base href to / in index.html
+Run the command ng deploy --base-href=’/’
+(this creates the gh-pages branch as specified)
+(it seems that the index.html gets messed up somewhere along that process)
+CLONE (however you want) gh-pages branch EXACTLY and manually change only the base href to be / (make sure you remember the cloned branch name with this change)
+Originally it was <base href="C:/Program Files/Git/"> but now it should be<base href="/">
+Go to github website settings > pages select the cloned-modified branch (root directory) and hit save (make sure to put in bedrumor.com in the custom domain)
+I did something weird with the CNAME record I’m not sure what (in namecheap)
+PUT THE CNAME record somewhere in the dist folder or just around???
+Check to see assets work
+
+
 for local development: in index.html -> href="/bedrumor/"
 
 run the following command inside angapp:
