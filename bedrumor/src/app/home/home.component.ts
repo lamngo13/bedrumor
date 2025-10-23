@@ -26,6 +26,8 @@ export class HomeComponent {
   ngOnInit() {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
+    //log version and github pages
+    console.log("Version 4.2.0 on gh branch: real_main");
   }
 
   ngOnDestroy() {
