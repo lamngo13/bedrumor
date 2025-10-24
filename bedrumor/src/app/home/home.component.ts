@@ -27,8 +27,10 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.2.0 on gh branch: real_main");
-    console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it). The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch, then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
+    console.log("Version 4.2.1 on gh branch: fix_sizing -> dev ->...");
+    console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
+    console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
+    console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
   }
 
   ngOnDestroy() {
