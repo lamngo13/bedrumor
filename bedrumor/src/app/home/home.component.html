@@ -15,8 +15,8 @@
     .cursor-follow-gif {
       position: absolute;
       pointer-events: none;
-      width: 50px;
-      height: 50px;
+      width: 3.5vw;
+      height: 3.5vw;
     }
 
     /* Ensure buttons and links also have the custom cursor when hovered */
@@ -35,7 +35,7 @@
 
   <div class="page-container">
     <!-- Header -->
-    <header class="sticky-header">
+    <header class="sticky-header" [class.scrolled]="isScrolled">
       <button class="menu-button rainbow_text_animated_menu" (click)="shop()">merch</button>
       <button class="menu-button rainbow_text_animated_menu" (click)="second()">gallery</button>
       <button class="menu-button rainbow_text_animated_menu" (click)="game()">game</button>
@@ -90,8 +90,6 @@
         <iframe
           src="https://calendar.google.com/calendar/embed?src=example_calendar_url"
           style="border: 0"
-          width="600"
-          height="600"
           frameborder="0"
           scrolling="no">
         </iframe>

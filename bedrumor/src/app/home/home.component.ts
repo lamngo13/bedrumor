@@ -18,6 +18,7 @@ export class HomeComponent {
   intervalId: any;
   imageSrc = "assets/img/sadheart.png";
   happy_heart_distance = 100;
+  isScrolled = false; // Track scroll state for header background
 
   constructor(private router: Router,
               private elementRef: ElementRef
@@ -27,8 +28,10 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.2.0 on gh branch: real_main");
-    console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it). The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch, then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
+    console.log("Version 4.2.2 on gh branch: fix_sizing -> dev ->...");
+    console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
+    console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
+    console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
   }
 
   ngOnDestroy() {
@@ -42,20 +45,12 @@ export class HomeComponent {
   onMouseMove(event: MouseEvent) {
     this.cursorPosition.x = event.clientX + window.scrollX;
     this.cursorPosition.y = event.clientY + window.scrollY;
-    // const cursorX = event.clientX + window.scrollX;
-    // const cursorY = event.clientY + window.scrollY;
+  }
 
-    // // Calculate the distance between the cursor and the GIF's current position
-    // const distanceX = cursorX - this.gifPosition.x;
-    // const distanceY = cursorY - this.gifPosition.y;
-    // const distance = Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
-
-    // // Move only if beyond the threshold distance
-    // if (distance > this.min_image_distance) {
-    //   // Update the position incrementally towards the cursor
-    //   this.gifPosition.x += distanceX * this.smoothing_value;
-    //   this.gifPosition.y += distanceY * this.smoothing_value;
-    // }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    // Check if user has scrolled down more than 50 pixels
+    this.isScrolled = window.scrollY > 50;
   }
 
   updateGifPosition() {
