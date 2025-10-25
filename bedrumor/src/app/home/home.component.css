@@ -21,6 +21,14 @@ body, html {
   display: flex;
   justify-content: center;
   z-index: 5;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* Smooth transition */
+}
+
+/* Header background when scrolled */
+.sticky-header.scrolled {
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  backdrop-filter: blur(10px); /* Adds a nice blur effect behind the header */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
 }
 
 .menu-button {

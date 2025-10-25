@@ -35,7 +35,7 @@
 
   <div class="page-container">
     <!-- Header -->
-    <header class="sticky-header">
+    <header class="sticky-header" [class.scrolled]="isScrolled">
       <button class="menu-button rainbow_text_animated_menu" (click)="shop()">merch</button>
       <button class="menu-button rainbow_text_animated_menu" (click)="second()">gallery</button>
       <button class="menu-button rainbow_text_animated_menu" (click)="game()">game</button>

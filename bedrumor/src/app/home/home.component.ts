@@ -18,6 +18,7 @@ export class HomeComponent {
   intervalId: any;
   imageSrc = "assets/img/sadheart.png";
   happy_heart_distance = 100;
+  isScrolled = false; // Track scroll state for header background
 
   constructor(private router: Router,
               private elementRef: ElementRef
@@ -44,20 +45,12 @@ export class HomeComponent {
   onMouseMove(event: MouseEvent) {
     this.cursorPosition.x = event.clientX + window.scrollX;
     this.cursorPosition.y = event.clientY + window.scrollY;
-    // const cursorX = event.clientX + window.scrollX;
-    // const cursorY = event.clientY + window.scrollY;
+  }
 
-    // // Calculate the distance between the cursor and the GIF's current position
-    // const distanceX = cursorX - this.gifPosition.x;
-    // const distanceY = cursorY - this.gifPosition.y;
-    // const distance = Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
-
-    // // Move only if beyond the threshold distance
-    // if (distance > this.min_image_distance) {
-    //   // Update the position incrementally towards the cursor
-    //   this.gifPosition.x += distanceX * this.smoothing_value;
-    //   this.gifPosition.y += distanceY * this.smoothing_value;
-    // }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    // Check if user has scrolled down more than 50 pixels
+    this.isScrolled = window.scrollY > 50;
   }
 
   updateGifPosition() {
