@@ -177,6 +177,47 @@ body, html {
   transition: top 0.1s, left 0.1s;
 }
 
+/* Rainbow text classes - DESKTOP defaults */
+.rainbow {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 32px;
+  font-family: monospace;
+  letter-spacing: 5px;
+}
+
+.rainbow_text_animated {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+.rainbow_text_animated_menu {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+  font-size: 4rem; /* Desktop size */
+  margin: 0 4.5vw; /* Desktop spacing */
+  padding: 0;
+  line-height: .0001;
+}
+
+@keyframes rainbow_animation {
+  0%,100% {
+      background-position: 0 0;
+  }
+
+  50% {
+      background-position: 100% 0;
+  }
+}
+
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
@@ -324,46 +365,6 @@ body, html {
   /* Rainbow text sizing */
   .rainbow_text_animated {
     font-size: 1.2rem;
-  }
-}
-
-/* rainow stuff which might affect just desktop */
-.rainbow {
-  text-align: center;
-  text-decoration: underline;
-  font-size: 32px;
-  font-family: monospace;
-  letter-spacing: 5px;
-}
-.rainbow_text_animated {
-  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 400% 100%;
-}
-
-.rainbow_text_animated_menu {
-  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 400% 100%;
-  font-size: 4rem; /* Increased from 2.2rem for bigger buttons */
-  margin: 0 4.5vw; /* Increased from 1.5vw for more spacing */
-  padding: 0;
-  line-height: .0001;
-}
-
-@keyframes rainbow_animation {
-  0%,100% {
-      background-position: 0 0;
-  }
-
-  50% {
-      background-position: 100% 0;
   }
 }
 
