@@ -34,7 +34,7 @@ body, html {
 .menu-button {
   background: none;
   border: none;
-  font-size: 2.2rem; /* Increased from 2rem for better readability */
+  font-size: 2rem; /* Increased from 2rem for better readability */
   color: white;
   margin: 0;
   padding: 0;
@@ -327,6 +327,7 @@ body, html {
   }
 }
 
+/* rainow stuff which might affect just desktop */
 .rainbow {
   text-align: center;
   text-decoration: underline;
@@ -350,8 +351,8 @@ body, html {
   color: transparent;
   animation: rainbow_animation 6s ease-in-out infinite;
   background-size: 400% 100%;
-  font-size: 2.2rem;
-  margin: 0 1.5vw; /* Increased from 0.625vw for better spacing */
+  font-size: 4rem; /* Increased from 2.2rem for bigger buttons */
+  margin: 0 4.5vw; /* Increased from 1.5vw for more spacing */
   padding: 0;
   line-height: .0001;
 }
