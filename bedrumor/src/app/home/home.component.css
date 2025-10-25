@@ -68,9 +68,9 @@ body, html {
 }
 
 .teal-btrfly {
-  padding-top: 40px;
+  padding-top: 2.5vh;
   width: auto;
-  height: 90px;
+  height: 5.6vh;
 }
 
 .video-container {
@@ -79,15 +79,15 @@ body, html {
 }
 
 .video-container iframe {
-  width: 600px; 
-  height: 400px;
+  width: 37.5vw; 
+  height: 25vh;
   float: right;
 }
 
 .mother-hands-title {
   text-align: right;
   padding-right: 15%;
-  padding-top: 10px;
+  padding-top: 0.625vh;
   font-size: 2rem;
   font-weight: lighter;
   color: rgb(121, 55, 115);
@@ -96,7 +96,7 @@ body, html {
 .about-title {
   text-align: right;
   padding-right: 24%;
-  padding-top: 10px;
+  padding-top: 0.625vh;
   font-size: 2rem;
   font-weight: lighter;
   color: rgb(121, 55, 115);
@@ -111,9 +111,9 @@ body, html {
   float: right;
   border: #dd99da;
   border-style: groove;
-  border-width: 20px;
-  border-radius: 10px;
-  padding: 8px;
+  border-width: 1.25vw;
+  border-radius: 0.625vw;
+  padding: 0.5vw;
 }
 
 .divider-butterfly {
@@ -123,8 +123,8 @@ body, html {
 }
 
 .butterfly-div {
-  height: 60px;
-  width: 700px;
+  height: 3.75vh;
+  width: 43.75vw;
 }
 
 /* Socials */
@@ -185,16 +185,16 @@ body, html {
     flex: unset;
     width: 100%; /* Take full width */
     max-width: none; /* Remove max width */
-    margin: 10px 0; /* Add spacing between items */
+    margin: 0.625vh 0; /* Add spacing between items */
   }
 
   .socials-links a {
     display: block; /* Stack links vertically on small screens */
-    margin: 5px auto;
+    margin: 0.3125vh auto;
   }
 
   .calendar iframe {
-    height: 400px; /* Reduce calendar height */
+    height: 25vh; /* Reduce calendar height */
   }
 }
 
@@ -222,7 +222,7 @@ body, html {
   animation: rainbow_animation 6s ease-in-out infinite;
   background-size: 400% 100%;
   font-size: 2rem;
-  margin: 0 10px;
+  margin: 0 0.625vw;
   padding: 0;
   line-height: .0001;
 }
