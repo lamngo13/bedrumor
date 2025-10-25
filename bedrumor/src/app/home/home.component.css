@@ -228,12 +228,12 @@ body, html {
   }
   
   .menu-button {
-    font-size: 1.1rem; /* Slightly reduced from 1rem */
+    font-size: 2rem; /* Slightly reduced from 1rem */
   }
   
   .rainbow_text_animated_menu {
-    font-size: 0.9rem; /* Slightly reduced from 1rem */
-    margin: 0 4.75vw; /* Increased from 2vw for better spacing */
+    font-size: 2rem; /* Slightly reduced from 1rem */
+    margin: 0 5vw; /* Increased from 2vw for better spacing */
   }
 
   /* Remove background image on mobile to prevent layout issues */
