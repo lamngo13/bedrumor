@@ -191,8 +191,8 @@ body, html {
   }
   
   .rainbow_text_animated_menu {
-    font-size: 1.1rem; /* Slightly reduced from 1rem */
-    margin: 0 4vw; /* Increased from 2vw for better spacing */
+    font-size: 0.9rem; /* Slightly reduced from 1rem */
+    margin: 0 4.75vw; /* Increased from 2vw for better spacing */
   }
 
   /* Remove background image on mobile to prevent layout issues */
