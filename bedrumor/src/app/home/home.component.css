@@ -8,6 +8,7 @@
 body, html {
   font-family: 'Times New Roman', serif;
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-width: 100vw; /* Ensure nothing exceeds viewport width */
 }
 
 /* Header */
@@ -40,8 +41,9 @@ body, html {
 .page-container {
   background: 
   url("../../assets/img/logopt2.png") no-repeat left -5% top 25%;
-
   background-size: 50%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .title-video-container {
@@ -153,8 +155,9 @@ body, html {
 }
 
 .calendar iframe {
-  max-width: 100%;
+  width: 37.5vw;
   height: 50vh; /* Adjusted from 500px */
+  max-width: 100%;
 }
 
 /* Cursor Follow GIF */
@@ -169,32 +172,150 @@ body, html {
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
+  /* Header adjustments */
+  .sticky-header {
+    height: 8vh;
+    padding: 0 2vw;
+  }
+  
   .menu-button {
     font-size: 1rem;
   }
+  
+  .rainbow_text_animated_menu {
+    font-size: 1rem;
+    margin: 0 2vw;
+  }
+
+  /* Remove background image on mobile to prevent layout issues */
+  .page-container {
+    background: none;
+  }
+
+  /* Stack content vertically */
+  .title-video-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    margin: 10vh auto 5vh auto;
+    gap: 3vh;
+  }
+
+  /* Title section adjustments */
+  .title-section {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-right: 0;
+    margin-bottom: 2vh;
+    text-align: center;
+  }
+
+  .teal-btrfly {
+    padding-top: 0;
+    height: 8vh;
+  }
+
+  /* Bio text - full width, centered */
+  .bio-text {
+    width: 100%;
+    order: 2;
+  }
+
+  .about-title {
+    text-align: center;
+    padding-right: 0;
+    font-size: 1.5rem;
+    margin-bottom: 2vh;
+  }
+
+  .bio-text p {
+    width: 90%;
+    float: none;
+    margin: 0 auto;
+    border-width: 0.5vh;
+    border-radius: 1vh;
+    padding: 3vw;
+    text-align: left;
+  }
+
+  /* Video container adjustments */
+  .video-container {
+    width: 95%;
+    order: 3;
+  }
+
+  .mother-hands-title {
+    text-align: center;
+    padding-right: 0;
+    font-size: 1.5rem;
+    margin-bottom: 2vh;
+  }
 
   .video-container iframe {
-    height: calc(90% * 0.5625); /* Smaller height for mobile */
+    width: 100%;
+    height: 25vh;
+    float: none;
+    display: block;
+    margin: 0 auto;
   }
 
-  .title-video-container {
-    flex-direction: column; /* Stack items vertically */
+  /* Butterfly divider - much smaller */
+  .divider-butterfly {
+    text-align: center;
+    padding-right: 0;
+    margin: 3vh auto;
   }
 
-  .video-container {
-    flex: unset;
-    width: 100%; /* Take full width */
-    max-width: none; /* Remove max width */
-    margin: 0.625vh 0; /* Add spacing between items */
+  .butterfly-div {
+    width: 80vw;
+    height: auto;
+    max-width: 300px;
+  }
+
+  /* Socials - centered */
+  .socials-container {
+    text-align: center;
+    padding-right: 0;
+    margin: 5vh auto;
   }
 
   .socials-links a {
-    display: block; /* Stack links vertically on small screens */
-    margin: 0.3125vh auto;
+    display: inline-block;
+    margin: 1vh 3vw;
+    font-size: 1rem;
+  }
+
+  /* Events calendar - centered and smaller */
+  .upcoming-events-container {
+    text-align: center;
+    padding-left: 0;
+    margin: 5vh auto;
+    width: 95%;
   }
 
   .calendar iframe {
-    height: 25vh; /* Reduce calendar height */
+    width: 90vw;
+    height: 40vh;
+    max-width: 400px;
+  }
+
+  /* Cursor follow gif - smaller on mobile */
+  .cursor-follow-gif {
+    width: 8vw;
+    height: 8vw;
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  /* Rainbow text sizing */
+  .rainbow_text_animated {
+    font-size: 1.2rem;
   }
 }
 
