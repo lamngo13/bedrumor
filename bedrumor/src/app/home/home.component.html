@@ -1,16 +1,45 @@
-<img 
-  [src]="imageSrc" 
-  [ngStyle]="{ top: gifPosition.y + 'px', left: gifPosition.x + 'px' }" 
-  class="cursor-follow-gif" 
-/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bedrumor</title>
+  <style>
+    /* Set the pink guitar cursor globally for all elements */
+    HTML, BODY {
+      cursor: url("https://downloads.totallyfreecursors.com/cursor_files/guitarpink.ani"), 
+             url("https://downloads.totallyfreecursors.com/thumbnails/guitarpink.gif"), auto;
+    }
 
-<div class="page-container" (mousemove)="onMouseMove($event)">
-  <!-- Header -->
-  <header class="sticky-header">
-    <button class="menu-button rainbow_text_animated_menu" (click)="shop()">merch</button>
-    <button class="menu-button rainbow_text_animated_menu" (click)="second()">gallery</button>
-    <button class="menu-button rainbow_text_animated_menu" (click)="game()">game</button>
-  </header>
+    /* If you want the cursor to follow mouse events, you can have this style: */
+    .cursor-follow-gif {
+      position: absolute;
+      pointer-events: none;
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Ensure buttons and links also have the custom cursor when hovered */
+    button, a {
+      cursor: url("https://downloads.totallyfreecursors.com/cursor_files/guitarpink.ani"), 
+             url("https://downloads.totallyfreecursors.com/thumbnails/guitarpink.gif"), auto;
+    }
+  </style>
+</head>
+<body (mousemove)="onMouseMove($event)">
+  <img 
+    [src]="imageSrc" 
+    [ngStyle]="{ top: gifPosition.y + 'px', left: gifPosition.x + 'px' }" 
+    class="cursor-follow-gif" 
+  />
+
+  <div class="page-container">
+    <!-- Header -->
+    <header class="sticky-header">
+      <button class="menu-button rainbow_text_animated_menu" (click)="shop()">merch</button>
+      <button class="menu-button rainbow_text_animated_menu" (click)="second()">gallery</button>
+      <button class="menu-button rainbow_text_animated_menu" (click)="game()">game</button>
+    </header>
 
     <div class="title-video-container">
 
@@ -69,3 +98,14 @@
       </div>
     </div>
   </div> <!-- Closing .page-container -->
+
+  <!-- <div class="todo">
+    <h1>about us section??? Idk like bios or something?</h1>
+  </div>
+
+  <div class="todo">
+    <h1>maybe a lil mini gallery or something?</h1>
+  </div> -->
+
+</body>
+</html>

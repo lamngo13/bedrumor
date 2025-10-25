@@ -8,14 +8,6 @@
 body, html {
   font-family: 'Times New Roman', serif;
   overflow-x: hidden; /* Prevent horizontal scrolling */
-  cursor: url("https://downloads.totallyfreecursors.com/cursor_files/guitarpink.ani"), 
-         url("https://downloads.totallyfreecursors.com/thumbnails/guitarpink.gif"), auto;
-}
-
-/* Ensure buttons and links also have the custom cursor when hovered */
-button, a {
-  cursor: url("https://downloads.totallyfreecursors.com/cursor_files/guitarpink.ani"), 
-         url("https://downloads.totallyfreecursors.com/thumbnails/guitarpink.gif"), auto;
 }
 
 /* Header */
@@ -69,7 +61,7 @@ button, a {
 }
 
 .title {
-  font-size: clamp(2rem, 8vw, 6rem); /* Responsive font size */
+  font-size: 6rem;
   font-weight: bold;
   color: rgb(121, 55, 115);
   margin-right: 32%;
@@ -87,8 +79,7 @@ button, a {
 }
 
 .video-container iframe {
-  width: 100%; 
-  max-width: 600px;
+  width: 600px; 
   height: 400px;
   float: right;
 }
@@ -179,147 +170,31 @@ button, a {
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
   .menu-button {
-    font-size: 1.5rem;
-  }
-
-  .title {
-    font-size: clamp(1.5rem, 12vw, 3rem) !important;
-    margin-right: 0;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-  .title-section {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  .teal-btrfly {
-    height: 60px;
-    margin-top: 10px;
-  }
-
-  .page-container {
-    background-size: 80%;
-    background-position: center top 20%;
+    font-size: 1rem;
   }
 
   .video-container iframe {
-    width: 100%;
-    max-width: 100%;
-    height: 250px;
-    float: none;
+    height: calc(90% * 0.5625); /* Smaller height for mobile */
   }
 
   .title-video-container {
-    flex-direction: column;
-    width: 95%;
-    padding: 10px;
-    gap: 20px;
+    flex-direction: column; /* Stack items vertically */
   }
 
   .video-container {
     flex: unset;
-    width: 100%;
-    max-width: none;
-    margin: 10px 0;
-  }
-
-  .mother-hands-title, .about-title {
-    text-align: center;
-    padding-right: 0;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .bio-text p {
-    width: 100%;
-    float: none;
-    border-width: 10px;
-    margin: 0;
-  }
-
-  .butterfly-div {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-  }
-
-  .divider-butterfly {
-    text-align: center;
-    padding-right: 0;
-  }
-
-  .socials-container {
-    text-align: center;
-    padding-right: 0;
+    width: 100%; /* Take full width */
+    max-width: none; /* Remove max width */
+    margin: 10px 0; /* Add spacing between items */
   }
 
   .socials-links a {
-    display: inline-block;
-    margin: 10px 15px;
-    font-size: 1.1rem;
-  }
-
-  .upcoming-events-container {
-    padding-left: 0;
-    width: 95%;
-    margin: 0 auto;
+    display: block; /* Stack links vertically on small screens */
+    margin: 5px auto;
   }
 
   .calendar iframe {
-    width: 100% !important;
-    height: 300px;
-    max-width: 100%;
-  }
-
-  .rainbow_text_animated {
-    font-size: 1.5rem;
-  }
-
-  .cursor-follow-gif {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-/* Additional breakpoint for very small screens (iPhone SE, etc.) */
-@media (max-width: 480px) {
-  .menu-button {
-    font-size: 1.2rem;
-    margin: 0 5px;
-  }
-
-  .title {
-    font-size: clamp(1.2rem, 10vw, 2.5rem) !important;
-  }
-
-  .sticky-header {
-    height: 8vh;
-    padding: 0 10px;
-  }
-
-  .title-video-container {
-    margin-top: 8vh;
-    width: 98%;
-  }
-
-  .bio-text p {
-    border-width: 5px;
-    padding: 6px;
-    font-size: 0.9rem;
-  }
-
-  .rainbow_text_animated {
-    font-size: 1.2rem;
-  }
-
-  .socials-links a {
-    display: block;
-    margin: 8px auto;
-    text-align: center;
+    height: 400px; /* Reduce calendar height */
   }
 }
 
