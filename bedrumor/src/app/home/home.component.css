@@ -15,7 +15,8 @@ body, html {
 .sticky-header {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: -2vw; /* Extend beyond the left edge */
+  width: 104vw; /* Make it wider than viewport */
   height: 10vh; /* Adjusted from absolute height */
   color: white;
   display: flex;
@@ -223,6 +224,8 @@ body, html {
 @media (max-width: 768px) {
   /* Header adjustments */
   .sticky-header {
+    left: -2vw; /* Extend beyond the left edge */
+    width: 104vw; /* Make it wider than viewport */
     height: 8vh;
     padding: 0 2vw;
   }
