@@ -329,9 +329,7 @@ body, html {
 
   /* Socials - centered */
   .socials-container {
-    text-align: center;
-    padding-right: 0;
-    margin: 5vh auto;
+    text-align: right;
   }
 
   .socials-links a {
