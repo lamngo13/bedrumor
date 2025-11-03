@@ -87,6 +87,10 @@ export class HomeComponent {
     window.open('https://bedrumor.bandcamp.com/merch', '_blank');
   }
 
+  guestbook_function() {
+    window.open('https://hidingplaces.band/', '_blank')
+  }
+
   game() {
     console.log('game');
     this.router.navigate(['/game']);
