@@ -11,6 +11,7 @@ import { ElementRef } from '@angular/core';
 export class SecondComponent {
 
   images = [
+    'assets/img/logo1.jpg',
     'assets/img/unnamed (14).jpg',
     'assets/img/unnamed (15).jpg',
     'assets/img/unnamed (17).jpg',
