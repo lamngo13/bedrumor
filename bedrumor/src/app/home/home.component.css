@@ -69,6 +69,8 @@ body, html {
 
 .title-section {
   display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .title {
@@ -79,9 +81,9 @@ body, html {
 }
 
 .teal-btrfly {
-  padding-top: 2.5vh;
-  width: auto;
-  height: 5.6vh;
+  padding-top: 0.1vh;
+  width: 70vh;
+  height: 6vh;
 }
 
 .video-container {
