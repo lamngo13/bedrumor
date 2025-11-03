@@ -23,12 +23,27 @@
     <div class="gallery-header">
       <button class="home-button" (click)="goHome()">Home</button>
     </div>
-    <div class="gallery-content">
-      <button class="arrow left-arrow" (click)="prevImage()">&#10094;</button>
-      <div class="image-container">
-        <img [src]="images[currentImage]" alt="Gallery Image">
+    
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      <div 
+        *ngFor="let image of images; let i = index" 
+        class="gallery-item"
+        (click)="openLightbox(i)"
+      >
+        <img [src]="image" [alt]="'Gallery Image ' + (i + 1)">
       </div>
-      <button class="arrow right-arrow" (click)="nextImage()">&#10095;</button>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
+      <div class="lightbox-content" (click)="$event.stopPropagation()">
+        <button class="lightbox-close" (click)="closeLightbox()">&times;</button>
+        <button class="lightbox-arrow lightbox-prev" (click)="prevLightboxImage()">&#10094;</button>
+        <img [src]="images[currentLightboxImage]" [alt]="'Gallery Image ' + (currentLightboxImage + 1)">
+        <button class="lightbox-arrow lightbox-next" (click)="nextLightboxImage()">&#10095;</button>
+        <div class="lightbox-counter">{{ currentLightboxImage + 1 }} / {{ images.length }}</div>
+      </div>
     </div>
   </div>
 
