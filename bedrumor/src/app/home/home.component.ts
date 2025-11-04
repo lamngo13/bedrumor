@@ -75,10 +75,19 @@ export class HomeComponent {
 }
 
   second() {
-    console.log('secondd');
+    console.log('gallery1');
 
     //start api stuff
+      fetch("newexpress-cgxldng86-lamngo13s-projects.vercel.app/api/", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(res => res.text())
+        .then(data => console.log("Response from backend:", data));
+
       //end api stuff
+
+      
     this.router.navigate(['/second']);
   }
 
