@@ -28,7 +28,7 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.3.0 on gh branch: new_images -> dev ->...");
+    console.log("Version 4.4.0 on gh branch: test_api -> dev ->...");
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
