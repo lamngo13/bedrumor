@@ -28,7 +28,7 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.2.1 on gh branch: new_images -> dev ->...");
+    console.log("Version 4.3.0 on gh branch: new_images -> dev ->...");
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
@@ -78,21 +78,6 @@ export class HomeComponent {
     console.log('secondd');
 
     //start api stuff
-  fetch("https://my-node-90ioa5adi-lamngo13s-projects.vercel.app/api/data", {
-    headers: {
-      "Authorization": "jfVG0YvtuV33FrClzylZwJBL"
-    }
-  })
-    .then(async res => {
-      const text = await res.text(); // 👈 Read raw text, not JSON
-      console.log("Raw response:", text); // 👈 See what came back
-      console.log("Status:", res.status);
-      console.log("Content-Type:", res.headers.get("content-type"));
-      return text;
-    })
-    .catch(err => console.error("Fetch error:", err));
-
-
       //end api stuff
     this.router.navigate(['/second']);
   }
