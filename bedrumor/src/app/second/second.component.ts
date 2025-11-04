@@ -11,6 +11,7 @@ import { ElementRef } from '@angular/core';
 export class SecondComponent {
 
   images = [
+    'assets/img/logo1.jpg',
     'assets/img/unnamed (14).jpg',
     'assets/img/unnamed (15).jpg',
     'assets/img/unnamed (17).jpg',
@@ -21,6 +22,8 @@ export class SecondComponent {
     'assets/img/unnamed (24).jpg'
   ]
   currentImage = 0;
+  lightboxOpen = false;
+  currentLightboxImage = 0;
   
     constructor(private router: Router,
       private elementRef: ElementRef
@@ -49,6 +52,27 @@ export class SecondComponent {
   
     nextImage() {
       this.currentImage = (this.currentImage + 1) % this.images.length;
+    }
+
+    openLightbox(index: number) {
+      this.currentLightboxImage = index;
+      this.lightboxOpen = true;
+      // Prevent body scrolling when lightbox is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeLightbox() {
+      this.lightboxOpen = false;
+      // Restore body scrolling
+      document.body.style.overflow = 'auto';
+    }
+
+    prevLightboxImage() {
+      this.currentLightboxImage = (this.currentLightboxImage - 1 + this.images.length) % this.images.length;
+    }
+
+    nextLightboxImage() {
+      this.currentLightboxImage = (this.currentLightboxImage + 1) % this.images.length;
     }
 
 }
