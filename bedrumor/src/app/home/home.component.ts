@@ -75,7 +75,25 @@ export class HomeComponent {
 }
 
   second() {
-    console.log('second');
+    console.log('secondd');
+
+    //start api stuff
+  fetch("https://my-node-90ioa5adi-lamngo13s-projects.vercel.app/api/data", {
+    headers: {
+      "Authorization": "jfVG0YvtuV33FrClzylZwJBL"
+    }
+  })
+    .then(async res => {
+      const text = await res.text(); // 👈 Read raw text, not JSON
+      console.log("Raw response:", text); // 👈 See what came back
+      console.log("Status:", res.status);
+      console.log("Content-Type:", res.headers.get("content-type"));
+      return text;
+    })
+    .catch(err => console.error("Fetch error:", err));
+
+
+      //end api stuff
     this.router.navigate(['/second']);
   }
 
