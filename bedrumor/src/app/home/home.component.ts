@@ -78,12 +78,13 @@ export class HomeComponent {
     console.log('gallery1');
 
     //start api stuff
-      fetch("newexpress-cgxldng86-lamngo13s-projects.vercel.app/api/", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      })
-        .then(res => res.text())
-        .then(data => console.log("Response from backend:", data));
+    fetch("https://newexpress-aedly0swu-lamngo13s-projects.vercel.app/?cors=1", {
+      method: "GET",
+      mode: "no-cors" // ⚠️ response is opaque, but can test connectivity
+    })
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
+
 
       //end api stuff
 

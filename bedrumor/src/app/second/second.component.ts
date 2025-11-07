@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 @Component({
   selector: 'app-second',
@@ -26,7 +28,18 @@ export class SecondComponent {
   currentLightboxImage = 0;
   
     constructor(private router: Router,
-      private elementRef: ElementRef
+      private elementRef: ElementRef,
+      public firebaseConfig = {
+      apiKey: "AIzaSyAbvX4RbHPol_YbxhlT9OcwR4Uam5WbbYw",
+      authDomain: "backendbedrumor.firebaseapp.com",
+      projectId: "backendbedrumor",
+      storageBucket: "backendbedrumor.firebasestorage.app",
+      messagingSenderId: "84162335637",
+      appId: "1:84162335637:web:0ea9e3fde79d8bc44b5c9c",
+      measurementId: "G-FS3XQHTMYQ"},
+      public app = initializeApp(firebaseConfig),
+      public analytics = getAnalytics(app)
+      
     ) {}
 
   //   ngAfterViewInit() {
