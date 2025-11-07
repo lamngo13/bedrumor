@@ -29,8 +29,9 @@ export class HomeComponent {
   messagingSenderId: "84162335637",
   appId: "1:84162335637:web:0ea9e3fde79d8bc44b5c9c",
   measurementId: "G-FS3XQHTMYQ"};
-  public app = initializeApp(firebaseConfig);
-  public analytics = getAnalytics(app);
+
+  public app = initializeApp(this.firebaseConfig);
+  public analytics = getAnalytics(this.app);
 
   constructor(private router: Router,
               private elementRef: ElementRef
