@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -78,12 +80,43 @@ export class HomeComponent {
     console.log('gallery1');
 
     //start api stuff
-      fetch("newexpress-cgxldng86-lamngo13s-projects.vercel.app/api/", {
+    fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
+      method: "GET",
+    })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.text();
+      })
+      .then(data => console.log("✅ Backend API Response:", data))
+      .catch(err => console.error("❌ API Error:", err));
+
+
+
+
+
+    //yeeeet
+    console.log("bruh machine part 5")
+      fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
         method: "GET",
-        headers: { "Content-Type": "application/json" }
       })
         .then(res => res.text())
         .then(data => console.log("Response from backend:", data));
+
+        //other way
+      console.log("bruh machine part 2")
+      fetch('https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          console.log('fetch API Response:', data);
+        })
+        .catch(error => {
+          console.error('fetch API Error:', error);
+        });
 
       //end api stuff
 
