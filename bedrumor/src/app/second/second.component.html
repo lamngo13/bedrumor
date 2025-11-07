@@ -22,6 +22,22 @@
   <div class="gallery-container">
     <div class="gallery-header">
       <button class="home-button" (click)="goHome()">Home</button>
+      
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <label for="file-upload" class="upload-button">
+          <span *ngIf="!uploading">+ Add Image</span>
+          <span *ngIf="uploading">Uploading...</span>
+        </label>
+        <input 
+          id="file-upload" 
+          type="file" 
+          accept="image/*" 
+          (change)="onFileSelected($event)"
+          [disabled]="uploading"
+          style="display: none;"
+        >
+      </div>
     </div>
     
     <!-- Gallery Grid -->
@@ -29,10 +45,17 @@
       <div 
         *ngFor="let image of images; let i = index" 
         class="gallery-item"
-        (click)="openLightbox(i)"
       >
-        <img [src]="image" [alt]="'Gallery Image ' + (i + 1)">
+        <img [src]="image.url" [alt]="'Gallery Image ' + (i + 1)" (click)="openLightbox(i)">
+        <button class="delete-button" (click)="deleteImage(image.id, image.path)" title="Delete image">
+          &times;
+        </button>
       </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="images.length === 0 && !uploading" class="empty-state">
+      <p>No images yet. Click "Add Image" to upload your first image!</p>
     </div>
 
     <!-- Lightbox Modal -->
@@ -40,7 +63,7 @@
       <div class="lightbox-content" (click)="$event.stopPropagation()">
         <button class="lightbox-close" (click)="closeLightbox()">&times;</button>
         <button class="lightbox-arrow lightbox-prev" (click)="prevLightboxImage()">&#10094;</button>
-        <img [src]="images[currentLightboxImage]" [alt]="'Gallery Image ' + (currentLightboxImage + 1)">
+        <img [src]="getImageUrl(currentLightboxImage)" [alt]="'Gallery Image ' + (currentLightboxImage + 1)">
         <button class="lightbox-arrow lightbox-next" (click)="nextLightboxImage()">&#10095;</button>
         <div class="lightbox-counter">{{ currentLightboxImage + 1 }} / {{ images.length }}</div>
       </div>

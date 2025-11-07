@@ -1,8 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, listAll } from "firebase/storage";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "firebase/firestore";
 
 @Component({
   selector: 'app-second',
@@ -10,22 +12,15 @@ import { getAnalytics } from "firebase/analytics";
   styleUrl: './second.component.css',
   encapsulation: ViewEncapsulation.None
 })
-export class SecondComponent {
+export class SecondComponent implements OnInit {
 
-  images = [
-    'assets/img/logo1.jpg',
-    'assets/img/unnamed (14).jpg',
-    'assets/img/unnamed (15).jpg',
-    'assets/img/unnamed (17).jpg',
-    'assets/img/unnamed (20).jpg',
-    'assets/img/unnamed (21).jpg',
-    'assets/img/unnamed (22).jpg',
-    'assets/img/unnamed (23).jpg',
-    'assets/img/unnamed (24).jpg'
-  ]
+  images: { id: string, url: string, path: string }[] = [];
   currentImage = 0;
   lightboxOpen = false;
   currentLightboxImage = 0;
+  uploading = false;
+  storage: any;
+  db: any;
   
     constructor(private router: Router,
       private elementRef: ElementRef,
@@ -40,7 +35,108 @@ export class SecondComponent {
       public app = initializeApp(firebaseConfig),
       public analytics = getAnalytics(app)
       
-    ) {}
+    ) {
+      this.storage = getStorage(this.app);
+      this.db = getFirestore(this.app);
+    }
+
+  ngOnInit() {
+    this.loadImages();
+  }
+
+  async loadImages() {
+    try {
+      const imagesCollection = collection(this.db, 'gallery-images');
+      const q = query(imagesCollection, orderBy('timestamp', 'desc'));
+      const querySnapshot = await getDocs(q);
+      
+      this.images = [];
+      querySnapshot.forEach((doc) => {
+        this.images.push({
+          id: doc.id,
+          url: doc.data()['url'],
+          path: doc.data()['path']
+        });
+      });
+    } catch (error) {
+      console.error('Error loading images:', error);
+    }
+  }
+
+  async onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+
+    this.uploading = true;
+    try {
+      // Create a unique filename with timestamp
+      const timestamp = Date.now();
+      const filename = `${timestamp}_${file.name}`;
+      const storageRef = ref(this.storage, `gallery/${filename}`);
+      
+      // Upload file to Firebase Storage
+      await uploadBytes(storageRef, file);
+      
+      // Get download URL
+      const downloadURL = await getDownloadURL(storageRef);
+      
+      // Save metadata to Firestore
+      const imagesCollection = collection(this.db, 'gallery-images');
+      await addDoc(imagesCollection, {
+        url: downloadURL,
+        path: `gallery/${filename}`,
+        timestamp: timestamp,
+        filename: file.name
+      });
+      
+      // Reload images
+      await this.loadImages();
+      
+      // Reset file input
+      event.target.value = '';
+      
+      alert('Image uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      this.uploading = false;
+    }
+  }
+
+  async deleteImage(imageId: string, imagePath: string) {
+    if (!confirm('Are you sure you want to delete this image?')) {
+      return;
+    }
+
+    try {
+      // Delete from Storage
+      const storageRef = ref(this.storage, imagePath);
+      await deleteObject(storageRef);
+      
+      // Delete from Firestore
+      await deleteDoc(doc(this.db, 'gallery-images', imageId));
+      
+      // Reload images
+      await this.loadImages();
+      
+      // Close lightbox if it was open
+      if (this.lightboxOpen) {
+        this.closeLightbox();
+      }
+      
+      alert('Image deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting image:', error);
+      alert('Failed to delete image. Please try again.');
+    }
+  }
 
   //   ngAfterViewInit() {
   //     this.elementRef.nativeElement.ownerDocument
@@ -86,6 +182,10 @@ export class SecondComponent {
 
     nextLightboxImage() {
       this.currentLightboxImage = (this.currentLightboxImage + 1) % this.images.length;
+    }
+
+    getImageUrl(index: number): string {
+      return this.images[index]?.url || '';
     }
 
 }
