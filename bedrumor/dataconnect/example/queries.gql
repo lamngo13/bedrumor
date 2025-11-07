@@ -1,0 +1,24 @@
+mutation CreateImage @auth(level: USER) {
+  image_insert(data: {
+    createdAt_expr: "request.time",
+    url: "https://example.com/default-image.jpg"
+  })
+}
+
+query ListImages @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  images {
+    id
+    createdAt
+    name
+    size
+    url
+  }
+}
+
+mutation UpdateImage($id: UUID!, $name: String) @auth(level: USER) {
+  image_update(key: {id: $id}, data: {name: $name})
+}
+
+mutation DeleteImage($id: UUID!) @auth(level: USER) {
+  image_delete(key: {id: $id})
+}

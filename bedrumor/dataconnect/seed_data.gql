@@ -1,0 +1,16 @@
+mutation PopulateDatabaseWithSeedData @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  image_insertMany(data: [
+    {
+      createdAt: "2024-04-01T00:00:00Z",
+      name: "Sample Image 1",
+      size: 1024,
+      url: "https://example.com/image1.jpg"
+    },
+    {
+      createdAt: "2024-04-02T00:00:00Z",
+      name: "Sample Image 2",
+      size: 2048,
+      url: "https://example.com/image2.jpg"
+    }
+  ])
+}

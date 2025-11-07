@@ -1,0 +1,6 @@
+type Image @table {
+  url: String!
+  createdAt: Timestamp!
+  name: String
+  size: Int
+}

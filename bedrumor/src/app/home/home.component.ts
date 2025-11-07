@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 @Component({
   selector: 'app-home',
@@ -19,6 +21,16 @@ export class HomeComponent {
   imageSrc = "assets/img/sadheart.png";
   happy_heart_distance = 100;
   isScrolled = false; // Track scroll state for header background
+  public firebaseConfig = {
+  apiKey: "AIzaSyAbvX4RbHPol_YbxhlT9OcwR4Uam5WbbYw",
+  authDomain: "backendbedrumor.firebaseapp.com",
+  projectId: "backendbedrumor",
+  storageBucket: "backendbedrumor.firebasestorage.app",
+  messagingSenderId: "84162335637",
+  appId: "1:84162335637:web:0ea9e3fde79d8bc44b5c9c",
+  measurementId: "G-FS3XQHTMYQ"};
+  public app = initializeApp(firebaseConfig);
+  public analytics = getAnalytics(app);
 
   constructor(private router: Router,
               private elementRef: ElementRef
