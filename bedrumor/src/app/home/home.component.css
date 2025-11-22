@@ -229,26 +229,30 @@ body, html {
     left: 0;
     width: 100vw;
     height: auto;
-    padding: 1vh 0;
+    min-height: 8vh;
+    padding: 1.5vh 2vw;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 1vh 3vw;
   }
   
   .menu-button {
-    font-size: 1rem;
-    padding: 0.5vh 2vw;
+    font-size: 0.9rem;
+    padding: 0.5vh 1.5vw;
+    white-space: nowrap;
   }
   
   .rainbow_text_animated_menu {
-    font-size: 1rem;
-    margin: 0 2vw;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.2;
   }
 
   /* Adjust background image for mobile to prevent layout issues */
   .page-container {
     background: none;
-    padding-top: 10vh;
+    padding-top: 12vh;
   }
 
   /* Stack content vertically */
