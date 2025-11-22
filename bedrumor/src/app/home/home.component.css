@@ -226,27 +226,29 @@ body, html {
 @media (max-width: 768px) {
   /* Header adjustments */
   .sticky-header {
-    left: -2vw; /* Extend beyond the left edge */
-    width: 104vw; /* Make it wider than viewport */
-    height: 8vh;
-    padding: 0 2vw;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    padding: 1vh 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
   
   .menu-button {
-    font-size: 2rem; /* Slightly reduced from 1rem */
+    font-size: 1rem;
+    padding: 0.5vh 2vw;
   }
   
   .rainbow_text_animated_menu {
-    font-size: 2rem; /* Slightly reduced from 1rem */
-    margin: 0 5vw; /* Increased from 2vw for better spacing */
+    font-size: 1rem;
+    margin: 0 2vw;
   }
 
   /* Adjust background image for mobile to prevent layout issues */
   .page-container {
-    background: 
-    url("../../assets/img/newmainimage.png") no-repeat center top;
-    background-size: contain;
-    background-attachment: scroll;
+    background: none;
+    padding-top: 10vh;
   }
 
   /* Stack content vertically */
@@ -255,8 +257,9 @@ body, html {
     align-items: center;
     text-align: center;
     width: 95%;
-    margin: 10vh auto 5vh auto;
+    margin: 5vh auto;
     gap: 3vh;
+    min-height: auto;
   }
 
   /* Title section adjustments */
@@ -267,7 +270,7 @@ body, html {
   }
 
   .title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-right: 0;
     margin-bottom: 2vh;
     text-align: center;
@@ -275,7 +278,9 @@ body, html {
 
   .teal-btrfly {
     padding-top: 0;
-    height: 8vh;
+    width: 80vw;
+    height: auto;
+    max-width: 300px;
   }
 
   /* Bio text - full width, centered */
@@ -297,8 +302,9 @@ body, html {
     margin: 0 auto;
     border-width: 0.5vh;
     border-radius: 1vh;
-    padding: 3vw;
+    padding: 4vw;
     text-align: left;
+    font-size: 1rem;
   }
 
   /* Video container adjustments */
@@ -316,37 +322,47 @@ body, html {
 
   .video-container iframe {
     width: 100%;
-    height: 25vh;
+    height: 56.25vw; /* 16:9 aspect ratio */
+    max-height: 300px;
     float: none;
     display: block;
     margin: 0 auto;
   }
 
-  /* Butterfly divider - much smaller */
+  /* Butterfly divider - centered and responsive */
   .divider-butterfly {
     text-align: center;
     padding-right: 0;
-    margin: 3vh auto;
+    margin: 4vh auto;
   }
 
   .butterfly-div {
-    width: 80vw;
+    width: 70vw;
     height: auto;
-    max-width: 300px;
+    max-width: 250px;
   }
 
   /* Socials - centered */
   .socials-container {
-    text-align: right;
+    text-align: center;
+    padding-right: 0;
+    margin: 4vh auto;
+  }
+
+  .socials-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
   }
 
   .socials-links a {
-    display: inline-block;
-    margin: 1vh 3vw;
-    font-size: 1rem;
+    display: block;
+    margin: 0;
+    font-size: 1.2rem;
   }
 
-  /* Events calendar - centered and smaller */
+  /* Events calendar - centered and responsive */
   .upcoming-events-container {
     text-align: center;
     padding-left: 0;
@@ -356,21 +372,22 @@ body, html {
 
   .calendar iframe {
     width: 90vw;
-    height: 40vh;
-    max-width: 400px;
+    height: 50vh;
+    max-width: 100%;
   }
 
   /* Cursor follow gif - smaller on mobile */
   .cursor-follow-gif {
-    width: 8vw;
-    height: 8vw;
-    max-width: 40px;
-    max-height: 40px;
+    width: 10vw;
+    height: 10vw;
+    max-width: 50px;
+    max-height: 50px;
   }
 
   /* Rainbow text sizing */
   .rainbow_text_animated {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
   }
 }
 
