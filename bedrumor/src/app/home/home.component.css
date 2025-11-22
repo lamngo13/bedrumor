@@ -238,13 +238,13 @@ body, html {
   }
   
   .menu-button {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     padding: 0.5vh 1.5vw;
     white-space: nowrap;
   }
   
   .rainbow_text_animated_menu {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin: 0;
     line-height: 1.2;
   }
