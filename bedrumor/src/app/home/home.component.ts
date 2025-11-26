@@ -138,7 +138,8 @@ export class HomeComponent {
 
   game() {
     console.log('game');
-    this.router.navigate(['/game']);
+    //this.router.navigate(['/game']);
+    window.open('https://poki.com/en/g/the-impossible-quiz-2', '_blank');
   }
 
   toggleLangugae() {  

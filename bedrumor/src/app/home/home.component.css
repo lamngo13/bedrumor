@@ -48,28 +48,26 @@ body, html {
 }
 
 .page-container {
-  background: 
-  url("../../assets/img/newmainimage.png") no-repeat left -5% top 25%;
-  background-size: 50%;
+  background: none;
   max-width: 100vw;
   overflow-x: hidden;
+  padding-top: 12vh;
 }
 
 .title-video-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   margin: 5vh auto; 
   width: 90%;
-  min-height: 85vh; /* Utilize more vertical space */
-  gap: 1.5vh; /* Adjusted from 20px */
+  gap: 4vh;
   position: relative;
 }
 
 .title-section {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -81,26 +79,27 @@ body, html {
 }
 
 .teal-btrfly {
-  padding-top: 0.1vh;
-  width: 70vh;
-  height: 6vh;
+  width: 60vw;
+  height: auto;
+  max-width: 500px;
 }
 
 .video-container {
-  width: 93%; /* Allow more space for the video */
-  height: 100%;
+  width: 90%;
+  max-width: 800px;
 }
 
 .video-container iframe {
-  width: 37.5vw; 
-  height: 25vh;
-  float: right;
+  width: 100%; 
+  height: 450px;
+  display: block;
+  margin: 0 auto;
 }
 
 .mother-hands-title {
-  text-align: right;
-  padding-right: 15%;
-  padding-top: 0.625vh;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 2vh;
   font-size: 2rem;
   font-weight: lighter;
   color: rgb(121, 55, 115);
@@ -130,28 +129,36 @@ body, html {
 }
 
 .divider-butterfly {
-  text-align: right;
+  text-align: center;
   margin: 5vh auto; 
-  padding-right: 6%;
+  padding: 0;
 }
 
 .butterfly-div {
-  height: 3.75vh;
-  width: 43.75vw;
+  width: 50vw;
+  height: auto;
+  max-width: 400px;
 }
 
 /* Socials */
 .socials-container {
-  text-align: right;
-  margin: 3vh auto; 
-  padding-right: 20%;
+  text-align: center;
+  margin: 5vh auto; 
+  padding: 0;
+}
+
+.socials-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
 }
 
 .socials-links a {
   color: #85C1E9;
   text-decoration: none;
-  margin: 0 1vw; /* Adjusted from 10px */
-  font-size: 1.2rem;
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 .socials-links a:hover {
@@ -161,14 +168,14 @@ body, html {
 /* Events */
 .upcoming-events-container {
   text-align: center;
-  margin: 3vh auto; /* Adjusted from 30px */
-  padding-left: 38%;
+  margin: 5vh auto;
+  padding: 0;
 }
 
 .calendar iframe {
-  width: 37.5vw;
-  height: 50vh; /* Adjusted from 500px */
-  max-width: 100%;
+  width: 80vw;
+  height: 60vh;
+  max-width: 800px;
 }
 
 /* Cursor Follow GIF */
@@ -238,13 +245,13 @@ body, html {
   }
   
   .menu-button {
-    font-size: 2rem;
-    padding: 0.5vh 1.5vw;
+    font-size: 0.85rem;
+    padding: 0.5vh 1vw;
     white-space: nowrap;
   }
   
   .rainbow_text_animated_menu {
-    font-size: 2rem;
+    font-size: 0.85rem;
     margin: 0;
     line-height: 1.2;
   }
@@ -281,10 +288,9 @@ body, html {
   }
 
   .teal-btrfly {
-    padding-top: 0;
     width: 80vw;
     height: auto;
-    max-width: 300px;
+    max-width: 350px;
   }
 
   /* Bio text - full width, centered */
@@ -327,8 +333,7 @@ body, html {
   .video-container iframe {
     width: 100%;
     height: 56.25vw; /* 16:9 aspect ratio */
-    max-height: 300px;
-    float: none;
+    max-height: 350px;
     display: block;
     margin: 0 auto;
   }
