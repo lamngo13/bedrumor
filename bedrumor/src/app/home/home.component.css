@@ -228,6 +228,23 @@ body, html {
   }
 }
 
+/* transparent overlay for youtube app */
+.video-wrapper {
+  position: relative;
+}
+
+.mobile-youtube-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  z-index: 999;
+  cursor: pointer;
+}
+/* end transparent overlay for youtube app */
+
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {

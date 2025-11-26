@@ -29,6 +29,8 @@ export class HomeComponent {
   //tempish_vid_id = 'https://www.youtube.com/embed/BAp5qps9vGI?si=5JNotkQNbyfZJ5Tk';
   tempish_vid_id = 'BAp5qps9vGI?si=5JNotkQNbyfZJ5Tk;'
   videoUrl!: SafeResourceUrl;
+  isMobile = false;
+  youtubeAppUrl = '';
 
   constructor(private router: Router,
               private elementRef: ElementRef,
@@ -42,7 +44,7 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.5.0 on gh branch: youtube1 -> dev ->...");
+    console.log("Version 4.5.2 on gh branch: youtube2 -> dev ->...");
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
@@ -54,7 +56,12 @@ export class HomeComponent {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${this.tempish_vid_id}`
     );
+    //mediq query
+    this.isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
+    this.youtubeAppUrl = `youtube://${this.tempish_vid_id}`;
   }
+
+    
 
   ngOnDestroy() {
     // Clear the interval when the component is destroyed
@@ -117,6 +124,7 @@ export class HomeComponent {
           //we should be able to do this because we have previous error handling
 
           //write to html
+          this.youtubeAppUrl = `youtube://${this.tempish_vid_id}`;
           this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${this.tempish_vid_id}`
     );
