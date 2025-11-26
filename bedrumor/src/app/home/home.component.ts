@@ -23,7 +23,9 @@ export class HomeComponent {
   isScrolled = false; // Track scroll state for header background
 
   constructor(private router: Router,
-              private elementRef: ElementRef
+              private elementRef: ElementRef,
+              private apiKey = 'AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg',
+              private channelId = 'UCT9m-yNvA5EyMGWslfDNzVQ'
   ) {}
 
   ngOnInit() {
@@ -34,6 +36,10 @@ export class HomeComponent {
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
+
+    //youtube stuff
+    //api key 
+    //AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg
   }
 
   ngOnDestroy() {
