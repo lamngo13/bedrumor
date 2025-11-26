@@ -115,6 +115,11 @@ export class HomeComponent {
           //we don't need the extra var of this_latest_vid_id but whatever
           this.tempish_vid_id = videoRes.items[0].snippet.resourceId.videoId;
           //we should be able to do this because we have previous error handling
+
+          //write to html
+          this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${this.tempish_vid_id}`
+    );
         },
         error: err => console.error("Playlist API error:", err)
       });
