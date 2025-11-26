@@ -4,6 +4,8 @@ import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -21,25 +23,37 @@ export class HomeComponent {
   imageSrc = "assets/img/sadheart.png";
   happy_heart_distance = 100;
   isScrolled = false; // Track scroll state for header background
+  latest_vid_id: string | null = null;
+  apiKey = 'AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg';
+  channelId = 'UCTuJgiePkL7vmi1W8J00Jfg'
+  //tempish_vid_id = 'https://www.youtube.com/embed/BAp5qps9vGI?si=5JNotkQNbyfZJ5Tk';
+  tempish_vid_id = 'BAp5qps9vGI?si=5JNotkQNbyfZJ5Tk;'
+  videoUrl!: SafeResourceUrl;
 
   constructor(private router: Router,
               private elementRef: ElementRef,
-              private apiKey = 'AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg',
-              private channelId = 'UCT9m-yNvA5EyMGWslfDNzVQ'
+              //private apiKey = 'AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg',
+              //private channelId = 'UCT9m-yNvA5EyMGWslfDNzVQ',
+              private http: HttpClient,
+              private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.4.3 on gh branch: fix_phone1 -> dev ->...");
+    console.log("Version 4.5.0 on gh branch: youtube1 -> dev ->...");
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
 
     //youtube stuff
-    //api key 
-    //AIzaSyCjl0sbUvHxIu-knW8y1TVMxa-OD6bp3Mg
+    console.log("initial latest_vid_id:", this.latest_vid_id);
+    this.zfetchLatestVideo();
+    console.log("fetched latest_vid_id:", this.latest_vid_id);
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${this.tempish_vid_id}`
+    );
   }
 
   ngOnDestroy() {
@@ -48,6 +62,66 @@ export class HomeComponent {
       clearInterval(this.intervalId);
     }
   }
+
+   fetchLatestVideo() {
+    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${this.channelId}&key=${this.apiKey}`;
+
+    this.http.get<any>(channelUrl).subscribe(channelRes => {
+      const uploadsPlaylistId =
+        channelRes.items[0].contentDetails.relatedPlaylists.uploads;
+
+      const playlistUrl =
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${this.apiKey}`;
+
+      this.http.get<any>(playlistUrl).subscribe(videoRes => {
+        this.latest_vid_id = videoRes.items[0].snippet.resourceId.videoId;
+        console.log("latest_vid_id loaded inside call:", this.latest_vid_id); // <-- this is the real one
+      });
+    });
+  }
+  //end fetchLatestVideo
+  zfetchLatestVideo() {
+  console.log("ai slop for youtube api w error handling");
+
+  const channelUrl =
+    `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${this.channelId}&key=${this.apiKey}`;
+
+  this.http.get<any>(channelUrl).subscribe({
+    next: channelRes => {
+      console.log("🔍 Channel API raw response:", channelRes);
+
+      if (!channelRes.items || channelRes.items.length === 0) {
+        console.error("No items returned — YouTube API error?");
+        return;
+      }
+
+      const uploadsPlaylistId =
+        channelRes.items[0].contentDetails.relatedPlaylists.uploads;
+
+      const playlistUrl =
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${this.apiKey}`;
+
+      this.http.get<any>(playlistUrl).subscribe({
+        next: videoRes => {
+          console.log("🎬 Playlist API raw response:", videoRes);
+
+          if (!videoRes.items || videoRes.items.length === 0) {
+            console.error("Playlist returned no videos");
+            return;
+          }
+
+          this.latest_vid_id = videoRes.items[0].snippet.resourceId.videoId;
+          console.log("Latest vid id:", this.latest_vid_id);
+          //we don't need the extra var of this_latest_vid_id but whatever
+          this.tempish_vid_id = videoRes.items[0].snippet.resourceId.videoId;
+          //we should be able to do this because we have previous error handling
+        },
+        error: err => console.error("Playlist API error:", err)
+      });
+    },
+    error: err => console.error("Channel API error:", err.error || err)
+  });
+}
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
