@@ -6,6 +6,11 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://wlzjjwoawqfixjqwdrfc.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1MDY1NjUsImV4cCI6MjA4MDA4MjU2NX0.zMJlHWJ1XZ1hfr_7FaDHaboF1FrOJgM_9Rbg3e6OR1I'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 @Component({
   selector: 'app-home',
@@ -44,10 +49,11 @@ export class HomeComponent {
     // Start the interval to update the GIF position
     this.intervalId = setInterval(() => this.updateGifPosition(), 16); // ~60 FPS
     //log version and github pages
-    console.log("Version 4.5.2 on gh branch: youtube2 -> dev ->...");
+    console.log("Version 4.6.1 on gh branch: backend1 -> dev ->...");
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
+    console.log(supabase)
 
     //youtube stuff
     console.log("initial latest_vid_id:", this.latest_vid_id);
@@ -135,6 +141,10 @@ export class HomeComponent {
     error: err => console.error("Channel API error:", err.error || err)
   });
 }
+
+  upload_image() {
+    console.log('upload_image');
+  }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
