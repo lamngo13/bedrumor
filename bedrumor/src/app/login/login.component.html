@@ -23,6 +23,13 @@
 
   <div class="gallery-header">
     <button *ngIf="isLoggedIn" class="home-button" (click)="genupload()">UPLOAD IMAGE</button>
+    <input 
+    type="file" 
+    #fileInput 
+    style="display:none" 
+    accept="image/*"
+    (change)="onFileSelected($event)"
+  >
   </div>
   
   <!-- Gallery Grid -->
