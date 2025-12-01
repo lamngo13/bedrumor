@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+//import { supabase } from '../supabase.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent {
 
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   isLoggedIn = false;
   password = 'fp'; // TODO env
 
@@ -25,6 +27,7 @@ export class LoginComponent {
   currentImage = 0;
   lightboxOpen = false;
   currentLightboxImage = 0;
+  selectedFile: File | null = null;
 
   constructor(
     private router: Router,
@@ -51,8 +54,59 @@ export class LoginComponent {
 
   genupload()  {
     console.log('Generating upload image...');
+    this.fileInput.nativeElement.click();
     // TODO implement upload image generation
   }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      console.log('No file selected');
+      return;
+    }
+
+    this.selectedFile = input.files[0];
+    console.log('Selected file:', this.selectedFile);
+    console.log("now attempting to send to backend...");
+  }
+
+  //  async uploadSadHeart() {
+  //   try {
+  //     // Step 1: Fetch file from assets
+  //     const response = await fetch('assets/img/sadheart.png');
+  //     const blob = await response.blob();
+
+  //     // Convert Blob → File
+  //     const file = new File([blob], 'sadheart.png', { type: 'image/png' });
+
+  //     // Step 2: Upload to Supabase
+  //     const { data, error } = await supabase
+  //       .storage
+  //       .from('images')            // bucket name
+  //       .upload('sadheart.png', file, {
+  //         upsert: true
+  //       });
+
+  //     if (error) {
+  //       console.error('Upload failed:', error);
+  //       return;
+  //     }
+
+  //     console.log('Upload success:', data);
+
+  //     // Step 3: Get public URL
+  //     const { data: urlData } = supabase
+  //       .storage
+  //       .from('images')
+  //       .getPublicUrl('sadheart.png');
+
+  //     console.log('Public URL:', urlData.publicUrl);
+
+  //   } catch (e) {
+  //     console.error('Error uploading:', e);
+  //   }
+  // }
 
   prevImage() {
     this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;

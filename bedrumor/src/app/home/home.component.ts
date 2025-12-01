@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { createClient } from '@supabase/supabase-js'
+import { supabase } from '../supabase.service';
 //import fs from 'fs';
 
 const supabaseUrl = 'https://wlzjjwoawqfixjqwdrfc.supabase.co'
@@ -15,7 +16,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1MDY1NjUsImV4cCI6MjA4MDA4MjU2NX0.zMJlHWJ1XZ1hfr_7FaDHaboF1FrOJgM_9Rbg3e6OR1I'
 const newsupakey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NDUwNjU2NSwiZXhwIjoyMDgwMDgyNTY1fQ.s04Wa8XsWYbCsDnzML4JpBKzojLgbVxcmSxspu3Uxs4'
 //^ use this one, but make sure to put it in gh env vars
-const supabase = createClient(supabaseUrl, newsupakey)
+//const supabase = createClient(supabaseUrl, newsupakey)
 
 @Component({
   selector: 'app-home',
@@ -58,7 +59,7 @@ export class HomeComponent {
     console.log("Note: this branch was deployed with ghpages branch (or something directly modified with it).")
     console.log("The steps are to make a local branch, run ng deploy -- base-href=quote/quote, that creates ghpages branch,")
     console.log("then modify ghpages branch to manually make index.html href = /, then deploy that on the ui with gh pages.")
-    console.log(supabase)
+    //console.log(supabase)
 
     //youtube stuff
     console.log("initial latest_vid_id:", this.latest_vid_id);
@@ -93,42 +94,42 @@ export class HomeComponent {
 //   console.log(data, error)
 // }
 
-  async uploadSadHeart() {
-    try {
-      // Step 1: Fetch file from assets
-      const response = await fetch('assets/img/sadheart.png');
-      const blob = await response.blob();
+  // async uploadSadHeart() {
+  //   try {
+  //     // Step 1: Fetch file from assets
+  //     const response = await fetch('assets/img/sadheart.png');
+  //     const blob = await response.blob();
 
-      // Convert Blob → File
-      const file = new File([blob], 'sadheart.png', { type: 'image/png' });
+  //     // Convert Blob → File
+  //     const file = new File([blob], 'sadheart.png', { type: 'image/png' });
 
-      // Step 2: Upload to Supabase
-      const { data, error } = await supabase
-        .storage
-        .from('images')            // bucket name
-        .upload('sadheart.png', file, {
-          upsert: true
-        });
+  //     // Step 2: Upload to Supabase
+  //     const { data, error } = await supabase
+  //       .storage
+  //       .from('images')            // bucket name
+  //       .upload('sadheart.png', file, {
+  //         upsert: true
+  //       });
 
-      if (error) {
-        console.error('Upload failed:', error);
-        return;
-      }
+  //     if (error) {
+  //       console.error('Upload failed:', error);
+  //       return;
+  //     }
 
-      console.log('Upload success:', data);
+  //     console.log('Upload success:', data);
 
-      // Step 3: Get public URL
-      const { data: urlData } = supabase
-        .storage
-        .from('images')
-        .getPublicUrl('sadheart.png');
+  //     // Step 3: Get public URL
+  //     const { data: urlData } = supabase
+  //       .storage
+  //       .from('images')
+  //       .getPublicUrl('sadheart.png');
 
-      console.log('Public URL:', urlData.publicUrl);
+  //     console.log('Public URL:', urlData.publicUrl);
 
-    } catch (e) {
-      console.error('Error uploading:', e);
-    }
-  }
+  //   } catch (e) {
+  //     console.error('Error uploading:', e);
+  //   }
+  // }
 
 
   zfetchLatestVideo() {
@@ -219,47 +220,47 @@ export class HomeComponent {
 
   second() {
     console.log('gallery1');
-    this.uploadSadHeart();
+    //this.uploadSadHeart();
     console.log("yuh yeet")
 
-    //start api stuff
-    fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
-      method: "GET",
-    })
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.text();
-      })
-      .then(data => console.log("✅ Backend API Response:", data))
-      .catch(err => console.error("❌ API Error:", err));
+    // //start api stuff
+    // fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
+    //   method: "GET",
+    // })
+    //   .then(res => {
+    //     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    //     return res.text();
+    //   })
+    //   .then(data => console.log("✅ Backend API Response:", data))
+    //   .catch(err => console.error("❌ API Error:", err));
 
 
 
 
 
-    //yeeeet
-    console.log("bruh machine part 5")
-      fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
-        method: "GET",
-      })
-        .then(res => res.text())
-        .then(data => console.log("Response from backend:", data));
+    // //yeeeet
+    // console.log("bruh machine part 5")
+    //   fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
+    //     method: "GET",
+    //   })
+    //     .then(res => res.text())
+    //     .then(data => console.log("Response from backend:", data));
 
-        //other way
-      console.log("bruh machine part 2")
-      fetch('https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then(data => {
-          console.log('fetch API Response:', data);
-        })
-        .catch(error => {
-          console.error('fetch API Error:', error);
-        });
+    //     //other way
+    //   console.log("bruh machine part 2")
+    //   fetch('https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test')
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //       }
+    //       return response.text();
+    //     })
+    //     .then(data => {
+    //       console.log('fetch API Response:', data);
+    //     })
+    //     .catch(error => {
+    //       console.error('fetch API Error:', error);
+    //     });
 
       //end api stuff
 
