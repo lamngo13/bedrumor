@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { GameComponent } from './game/game.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -17,7 +18,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     SecondComponent,
     HomeComponent,
     ShopComponent,
-    GameComponent
+    GameComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
