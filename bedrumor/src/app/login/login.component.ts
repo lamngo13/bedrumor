@@ -10,6 +10,11 @@ import { ElementRef } from '@angular/core';
 })
 export class LoginComponent {
 
+  isLoggedIn = false;
+  password = 'fp'
+  //irl make sure this is in gh env
+  //TODO 
+
   images = [
     'assets/img/logo1.jpg',
     'assets/img/unnamed (14).jpg',
@@ -42,6 +47,16 @@ export class LoginComponent {
     goLogin() {
       console.log('login');
       this.router.navigate(['/login']);
+    }
+
+    tryLogin() {
+      const userInput = (document.getElementById('passwordInput') as HTMLInputElement).value; 
+      if (userInput === this.password) {
+        this.isLoggedIn = true;
+        alert('Login successful!');
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
     }
 
     prevImage() {
