@@ -7,10 +7,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { createClient } from '@supabase/supabase-js'
+//import fs from 'fs';
 
 const supabaseUrl = 'https://wlzjjwoawqfixjqwdrfc.supabase.co'
+//TODO env this
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1MDY1NjUsImV4cCI6MjA4MDA4MjU2NX0.zMJlHWJ1XZ1hfr_7FaDHaboF1FrOJgM_9Rbg3e6OR1I'
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1MDY1NjUsImV4cCI6MjA4MDA4MjU2NX0.zMJlHWJ1XZ1hfr_7FaDHaboF1FrOJgM_9Rbg3e6OR1I'
+const newsupakey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NDUwNjU2NSwiZXhwIjoyMDgwMDgyNTY1fQ.s04Wa8XsWYbCsDnzML4JpBKzojLgbVxcmSxspu3Uxs4'
+//^ use this one, but make sure to put it in gh env vars
+const supabase = createClient(supabaseUrl, newsupakey)
 
 @Component({
   selector: 'app-home',
@@ -73,6 +78,55 @@ export class HomeComponent {
     // Clear the interval when the component is destroyed
     if (this.intervalId) {
       clearInterval(this.intervalId);
+    }
+  }
+
+//   async upload() {
+//   const file = fs.readFileSync('assets/img/sadheart.png')
+
+//   const { data, error } = await supabase.storage
+//     .from('images')
+//     .upload('test.jpg', file, {
+//       contentType: 'image/jpeg'
+//     })
+
+//   console.log(data, error)
+// }
+
+  async uploadSadHeart() {
+    try {
+      // Step 1: Fetch file from assets
+      const response = await fetch('assets/img/sadheart.png');
+      const blob = await response.blob();
+
+      // Convert Blob → File
+      const file = new File([blob], 'sadheart.png', { type: 'image/png' });
+
+      // Step 2: Upload to Supabase
+      const { data, error } = await supabase
+        .storage
+        .from('images')            // bucket name
+        .upload('sadheart.png', file, {
+          upsert: true
+        });
+
+      if (error) {
+        console.error('Upload failed:', error);
+        return;
+      }
+
+      console.log('Upload success:', data);
+
+      // Step 3: Get public URL
+      const { data: urlData } = supabase
+        .storage
+        .from('images')
+        .getPublicUrl('sadheart.png');
+
+      console.log('Public URL:', urlData.publicUrl);
+
+    } catch (e) {
+      console.error('Error uploading:', e);
     }
   }
 
@@ -181,6 +235,8 @@ export class HomeComponent {
 
   second() {
     console.log('gallery1');
+    this.uploadSadHeart();
+    console.log("yuh yeet")
 
     //start api stuff
     fetch("https://backendbedrumor-loyr8h04h-lamngo13s-projects.vercel.app/api/test", {
