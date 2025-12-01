@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dial
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-//import { supabase } from '../supabase.service';
+import { supabase } from '../supabase.service';
 
 @Component({
   selector: 'app-login',
@@ -69,6 +69,8 @@ export class LoginComponent {
     this.selectedFile = input.files[0];
     console.log('Selected file:', this.selectedFile);
     console.log("now attempting to send to backend...");
+    this.generalUpload()
+    console.log("attempted upload its async tho idk how that works")
   }
 
   //  async uploadSadHeart() {
@@ -107,6 +109,45 @@ export class LoginComponent {
   //     console.error('Error uploading:', e);
   //   }
   // }
+  async generalUpload() {
+  try {
+    if (!this.selectedFile) {
+      console.error('No file selected');
+      return;
+    }
+
+    const file = this.selectedFile;
+
+    // Use the original behavior: upload using its actual filename
+    const fileName = file.name;
+
+    // Step 2: Upload to Supabase
+    const { data, error } = await supabase
+      .storage
+      .from('images')            // bucket name
+      .upload(fileName, file, {
+        upsert: true
+      });
+
+    if (error) {
+      console.error('Upload failed:', error);
+      return;
+    }
+
+    console.log('Upload success:', data);
+
+    // Step 3: Get public URL
+    const { data: urlData } = supabase
+      .storage
+      .from('images')
+      .getPublicUrl(fileName);
+
+    console.log('Public URL:', urlData.publicUrl);
+
+  } catch (e) {
+    console.error('Error uploading:', e);
+  }
+}
 
   prevImage() {
     this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
