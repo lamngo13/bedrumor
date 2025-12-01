@@ -24,6 +24,7 @@ export class LoginComponent {
   images: { name: string; url: string }[] = [
     { name: 'logo1.jpg', url: 'assets/img/logo1.jpg' },
     { name: 'unnamed (14).jpg', url: 'assets/img/unnamed (14).jpg' }
+    //THIS IS A PLACEHOLDER IN CASE NOTHING LOADS
   ];
 
   currentImage = 0;
@@ -98,59 +99,69 @@ export class LoginComponent {
   }
 
     async loadPassword() {
-    try {
-      const { data: files, error } = await supabase
-        .storage
-        .from('fp')
-        .list('', {
-          limit: 1000,
-          offset: 0
-        });
+  try {
+    const { data: files, error } = await supabase
+      .storage
+      .from('fp')
+      .list('', {
+        limit: 1000,
+        offset: 0
+      });
 
-      if (error) {
-        console.error('Failed to list password:', error);
-        return;
-      }
-
-      if (!files) {
-        console.error('No files returned for password.');
-        return;
-      }
-
-      // Convert to objects containing name + public URL
-      var tpass = files
-        .filter(f => !f.name.endsWith('/'))
-        .map(async f => {
-          const { data } = supabase
-            .storage
-            .from('fp')
-            .getPublicUrl(f.name);
-
-          // 4. Fetch its contents
-          const resp = await fetch(data.publicUrl);
-          const text = await resp.text(); // plaintext OR json-as-text
-
-          // 5. Store the password locally
-          const password = text.trim(); // "pretendpassword"
-
-          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/fp/fpp.json 400 (Bad Request)
-          
-          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/unnamed%20(17).jpg
-          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/logo1.jpg
-          //this is reference from images and it works
-          
-          console.log('PASSWORD LOADED:', password);
-
-          return password;
-
-
-        });
-
-
-    } catch (e) {
-      console.error('Error loading password:', e);
+    if (error) {
+      console.error('Failed to list password:', error);
+      return null; // ensure function returns something
     }
+
+    if (!files) {
+      console.error('No files returned for password.');
+      return null; // ensure function returns something
+    }
+
+    // Convert to objects containing name + public URL (now SIGNED URLs)
+    var tpass = files
+      .filter(f => !f.name.endsWith('/'))
+      .map(async f => {
+
+        // Instead of public URL → create a signed URL (private bucket fix)
+        const { data: signed, error: signedErr } = await supabase
+          .storage
+          .from('fp')
+          .createSignedUrl(f.name, 60); // URL valid for 60 seconds
+
+        if (signedErr) {
+          console.error('Failed to create signed URL:', signedErr);
+          return null;
+        }
+
+        const signedUrl = signed.signedUrl;
+
+        // 4. Fetch its contents (same as before)
+        const resp = await fetch(signedUrl);
+        const text = await resp.text(); // plaintext OR json-as-text
+
+        // 5. Store the password locally
+        const password = text.trim(); // "pretendpassword"
+
+        //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/fp/fpp.json 400 (Bad Request)
+        
+        //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/unnamed%20(17).jpg
+        //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/logo1.jpg
+        //this is reference from images and it works
+        
+        console.log('PASSWORD LOADED:', password);
+
+        return password;
+      });
+
+    return tpass; // ensure function returns something
+
+  } catch (e) {
+    console.error('Error loading password:', e);
+    return null; // ensure all paths return something
   }
+}
+
   // ------------------------------
   // FILE UPLOAD
   // ------------------------------
