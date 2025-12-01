@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { supabase } from '../supabase.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   isLoggedIn = false;
-  password = 'fp'; // TODO env
+  password = "bruh";
+  temppassword = "yeet";
 
   // NOW stores both filename + URL
   images: { name: string; url: string }[] = [
@@ -38,6 +40,7 @@ export class LoginComponent {
 
   ngOnInit() {
     this.loadAllImages();
+    this.loadPassword();
   }
 
   ngOnDestroy() {
@@ -79,6 +82,9 @@ export class LoginComponent {
             .from('images')
             .getPublicUrl(f.name);
 
+            console.log('Public URL data:', data.publicUrl);
+
+
           return {
             name: f.name,
             url: data.publicUrl
@@ -92,6 +98,59 @@ export class LoginComponent {
     }
   }
 
+    async loadPassword() {
+    try {
+      const { data: files, error } = await supabase
+        .storage
+        .from('fp')
+        .list('', {
+          limit: 1000,
+          offset: 0
+        });
+
+      if (error) {
+        console.error('Failed to list password:', error);
+        return;
+      }
+
+      if (!files) {
+        console.error('No files returned for password.');
+        return;
+      }
+
+      // Convert to objects containing name + public URL
+      var tpass = files
+        .filter(f => !f.name.endsWith('/'))
+        .map(async f => {
+          const { data } = supabase
+            .storage
+            .from('fp')
+            .getPublicUrl(f.name);
+
+          // 4. Fetch its contents
+          const resp = await fetch(data.publicUrl);
+          const text = await resp.text(); // plaintext OR json-as-text
+
+          // 5. Store the password locally
+          const password = text.trim(); // "pretendpassword"
+
+          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/fp/fpp.json 400 (Bad Request)
+          
+          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/unnamed%20(17).jpg
+          //this is reference from images and it works
+          
+          console.log('PASSWORD LOADED:', password);
+
+          return password;
+
+
+        });
+
+
+    } catch (e) {
+      console.error('Error loading password:', e);
+    }
+  }
   // ------------------------------
   // FILE UPLOAD
   // ------------------------------
