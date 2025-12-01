@@ -31,7 +31,7 @@
         class="gallery-item"
         (click)="openLightbox(i)"
       >
-        <img [src]="image" [alt]="'Gallery Image ' + (i + 1)">
+        <img [src]="image.url" [alt]="'Gallery Image ' + (i + 1)">
       </div>
     </div>
 
@@ -47,8 +47,13 @@
     </div>
   </div>
 
-    <div class="gallery-header">
-      <button class="home-button" (click)="goLogin()">bruh</button>
+    <div class="secretish-button">
+      <img
+        src="assets/img/logo1.jpg"
+        alt="secret"
+        class="secret-button-image"
+        (click)="goLogin()"
+      />
     </div>
 
 </body>

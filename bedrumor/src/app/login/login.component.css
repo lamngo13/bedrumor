@@ -1,14 +1,11 @@
-
-
-  
 html {
     margin: 0;
     padding: 0;
     height: 100%;
     background-color: #e6b3e6;
-  }
+}
   
-  .gallery-container {
+.gallery-container {
     background-color: #e6b3e6;
     color: #fff;
     text-align: center;
@@ -161,6 +158,15 @@ html {
   border-radius: 20px;
 }
 
+/* UPDATED: DELETE BUTTON NOW TOP-RIGHT */
+.delete-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1100;
+  transform: none;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .gallery-grid {
@@ -198,4 +204,3 @@ html {
     font-size: 14px;
   }
 }
-  

@@ -20,6 +20,7 @@ html {
 .gallery-header {
     margin-bottom: 30px;
 }
+
   
 .home-button {
   background-color: #e6b3e6;
@@ -161,8 +162,33 @@ html {
   border-radius: 20px;
 }
 
+.secretish-button {
+  position: fixed;      /* Stick to screen */
+  bottom: 0.5em;        /* Small gap from bottom */
+  right: 0.5em;         /* Small gap from right */
+  z-index: 100;         /* Clickable above everything */
+}
+
+.secret-button-image {
+  width: 2em;            /* Tiny image */
+  height: auto;          /* Maintain aspect ratio */
+  cursor: pointer;       /* Pointer for admin */
+  opacity: 0.25;         /* Almost invisible */
+  transition: opacity 0.2s ease;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+
+  .secretish-button {
+    bottom: 0.5em;
+    right: 0.5em;
+  }
+
+  .secret-button-image {
+    width: 1.5em;        /* Slightly smaller on mobile */
+  }
+
   .gallery-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
