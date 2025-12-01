@@ -1,6 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementRef } from '@angular/core';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -11,81 +15,115 @@ import { ElementRef } from '@angular/core';
 export class LoginComponent {
 
   isLoggedIn = false;
-  password = 'fp'
-  //irl make sure this is in gh env
-  //TODO 
+  password = 'fp'; // TODO env
 
   images = [
     'assets/img/logo1.jpg',
     'assets/img/unnamed (14).jpg',
-  ]
+  ];
+
   currentImage = 0;
   lightboxOpen = false;
   currentLightboxImage = 0;
-  
-    constructor(private router: Router,
-      private elementRef: ElementRef
-    ) {}
 
-  //   ngAfterViewInit() {
-  //     this.elementRef.nativeElement.ownerDocument
-  //         .body.style.backgroundColor = '#494b57';
-  // }
+  constructor(
+    private router: Router,
+    private elementRef: ElementRef,
+    public dialog: MatDialog
+  ) {}
 
   ngOnDestroy() {
-    // Reset the background color when this component is destroyed
-    this.elementRef.nativeElement.ownerDocument
-        .body.style.backgroundColor = ''; // Reset to default or specify a default color
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '';
   }
 
-  
-    goHome() {
-      console.log('home');
-      this.router.navigate(['/home']);
-    }
+  goHome() { this.router.navigate(['/home']); }
+  goLogin() { this.router.navigate(['/login']); }
 
-    goLogin() {
-      console.log('login');
-      this.router.navigate(['/login']);
+  tryLogin() {
+    const userInput = (document.getElementById('passwordInput') as HTMLInputElement).value;
+    if (userInput === this.password) {
+      this.isLoggedIn = true;
+      alert('Login successful!');
+    } else {
+      alert('Incorrect password.');
     }
+  }
 
-    tryLogin() {
-      const userInput = (document.getElementById('passwordInput') as HTMLInputElement).value; 
-      if (userInput === this.password) {
+  genupload()  {
+    console.log('Generating upload image...');
+    // TODO implement upload image generation
+  }
+
+  prevImage() {
+    this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
+  }
+
+  nextImage() {
+    this.currentImage = (this.currentImage + 1) % this.images.length;
+  }
+
+  openLightbox(index: number) {
+    this.currentLightboxImage = index;
+    this.lightboxOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeLightbox() {
+    this.lightboxOpen = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  prevLightboxImage() {
+    this.currentLightboxImage = (this.currentLightboxImage - 1 + this.images.length) % this.images.length;
+  }
+
+  nextLightboxImage() {
+    this.currentLightboxImage = (this.currentLightboxImage + 1) % this.images.length;
+  }
+
+
+  // -----------------------------
+  // ✅ OPEN THE INLINE DIALOG
+  // -----------------------------
+  openPasswordDialog() {
+    const ref = this.dialog.open(PasswordDialogComponent, {
+      width: '300px'
+    });
+
+    ref.afterClosed().subscribe(result => {
+      if (!result) return;
+      if (result === this.password) {
         this.isLoggedIn = true;
         alert('Login successful!');
       } else {
-        alert('Incorrect password. Please try again.');
+        alert('Incorrect password.');
       }
-    }
+    });
+  }
+}
 
-    prevImage() {
-      this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
-    }
-  
-    nextImage() {
-      this.currentImage = (this.currentImage + 1) % this.images.length;
-    }
 
-    openLightbox(index: number) {
-      this.currentLightboxImage = index;
-      this.lightboxOpen = true;
-      // Prevent body scrolling when lightbox is open
-      document.body.style.overflow = 'hidden';
-    }
+/* =======================================================
+   ✅ INLINE DIALOG COMPONENT (AOT-SAFE, SAME FILE)
+   ======================================================= */
 
-    closeLightbox() {
-      this.lightboxOpen = false;
-      // Restore body scrolling
-      document.body.style.overflow = 'auto';
-    }
+@Component({
+  standalone: true,
+  template: `
+    <h3>Enter Password</h3>
+    <input matInput [(ngModel)]="password" type="password" autofocus />
 
-    prevLightboxImage() {
-      this.currentLightboxImage = (this.currentLightboxImage - 1 + this.images.length) % this.images.length;
-    }
+    <div style="margin-top: 16px; text-align: right;">
+      <button mat-button (click)="close()">OK</button>
+    </div>
+  `,
+  imports: [MatDialogModule, MatInputModule, MatButtonModule, FormsModule]
+})
+export class PasswordDialogComponent {
+  password = '';
+  ref = inject(MatDialogRef<PasswordDialogComponent>);
 
-    nextLightboxImage() {
-      this.currentLightboxImage = (this.currentLightboxImage + 1) % this.images.length;
-    }
-
+  close() {
+    this.ref.close(this.password);
+  }
 }

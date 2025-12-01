@@ -9,6 +9,7 @@ import { ShopComponent } from './shop/shop.component';
 import { GameComponent } from './game/game.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
@@ -27,6 +28,7 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
