@@ -19,10 +19,10 @@ export class LoginComponent {
   isLoggedIn = false;
   password = 'fp'; // TODO env
 
-  images = [
-    'assets/img/logo1.jpg',
-    'assets/img/unnamed (14).jpg',
-    //these shouldn't be displayed, but are a placeholder
+  // NOW stores both filename + URL
+  images: { name: string; url: string }[] = [
+    { name: 'logo1.jpg', url: 'assets/img/logo1.jpg' },
+    { name: 'unnamed (14).jpg', url: 'assets/img/unnamed (14).jpg' }
   ];
 
   currentImage = 0;
@@ -38,8 +38,8 @@ export class LoginComponent {
 
   ngOnInit() {
     this.loadAllImages();
-    }
-  
+  }
+
   ngOnDestroy() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '';
   }
@@ -47,67 +47,56 @@ export class LoginComponent {
   goHome() { this.router.navigate(['/home']); }
   goLogin() { this.router.navigate(['/login']); }
 
-  getImages() {
-    //get images from supabse, and rewrite them to this.images
-  }
-
+  // ------------------------------
+  // LOAD ALL IMAGES FROM SUPABASE
+  // ------------------------------
   async loadAllImages() {
-  try {
-    // Step 1: List all files in the bucket
-    const { data: files, error } = await supabase
-      .storage
-      .from('images')
-      .list('', {
-        limit: 1000,
-        offset: 0
-      });
+    try {
+      const { data: files, error } = await supabase
+        .storage
+        .from('images')
+        .list('', {
+          limit: 1000,
+          offset: 0
+        });
 
-    if (error) {
-      console.error('Failed to list images:', error);
-      return;
-    }
+      if (error) {
+        console.error('Failed to list images:', error);
+        return;
+      }
 
-    if (!files) {
-      console.error('No files returned.');
-      return;
-    }
+      if (!files) {
+        console.error('No files returned.');
+        return;
+      }
 
-    // Step 2: Convert each file entry into a public URL
-    const imageUrls = files
-      .filter(f => !f.name.endsWith('/')) // ignore folder entries
-      .map(f => {
-        const { data } = supabase
-          .storage
-          .from('images')
-          .getPublicUrl(f.name);
+      // Convert to objects containing name + public URL
+      this.images = files
+        .filter(f => !f.name.endsWith('/'))
+        .map(f => {
+          const { data } = supabase
+            .storage
+            .from('images')
+            .getPublicUrl(f.name);
 
-        return data.publicUrl;
-      });
+          return {
+            name: f.name,
+            url: data.publicUrl
+          };
+        });
 
-    // Step 3: Store into your component's array
-    this.images = imageUrls;
+      console.log('Loaded images:', this.images);
 
-    console.log('Loaded images:', this.images);
-
-  } catch (e) {
-    console.error('Error loading images:', e);
-  }
-}
-
-  tryLogin() {
-    const userInput = (document.getElementById('passwordInput') as HTMLInputElement).value;
-    if (userInput === this.password) {
-      this.isLoggedIn = true;
-      alert('Login successful!');
-    } else {
-      alert('Incorrect password.');
+    } catch (e) {
+      console.error('Error loading images:', e);
     }
   }
 
-  genupload()  {
-    console.log('Generating upload image...');
+  // ------------------------------
+  // FILE UPLOAD
+  // ------------------------------
+  genupload() {
     this.fileInput.nativeElement.click();
-    // TODO implement upload image generation
   }
 
   onFileSelected(event: Event) {
@@ -120,90 +109,67 @@ export class LoginComponent {
 
     this.selectedFile = input.files[0];
     console.log('Selected file:', this.selectedFile);
-    console.log("now attempting to send to backend...");
-    this.generalUpload()
-    console.log("attempted upload its async tho idk how that works")
+
+    this.generalUpload();
   }
 
-  //  async uploadSadHeart() {
-  //   try {
-  //     // Step 1: Fetch file from assets
-  //     const response = await fetch('assets/img/sadheart.png');
-  //     const blob = await response.blob();
-
-  //     // Convert Blob → File
-  //     const file = new File([blob], 'sadheart.png', { type: 'image/png' });
-
-  //     // Step 2: Upload to Supabase
-  //     const { data, error } = await supabase
-  //       .storage
-  //       .from('images')            // bucket name
-  //       .upload('sadheart.png', file, {
-  //         upsert: true
-  //       });
-
-  //     if (error) {
-  //       console.error('Upload failed:', error);
-  //       return;
-  //     }
-
-  //     console.log('Upload success:', data);
-
-  //     // Step 3: Get public URL
-  //     const { data: urlData } = supabase
-  //       .storage
-  //       .from('images')
-  //       .getPublicUrl('sadheart.png');
-
-  //     console.log('Public URL:', urlData.publicUrl);
-
-  //   } catch (e) {
-  //     console.error('Error uploading:', e);
-  //   }
-  // }
   async generalUpload() {
-  try {
-    if (!this.selectedFile) {
-      console.error('No file selected');
-      return;
+    try {
+      if (!this.selectedFile) {
+        console.error('No file selected');
+        return;
+      }
+
+      const file = this.selectedFile;
+      const fileName = file.name;
+
+      const { data, error } = await supabase
+        .storage
+        .from('images')
+        .upload(fileName, file, { upsert: true });
+
+      if (error) {
+        console.error('Upload failed:', error);
+        return;
+      }
+
+      console.log('Upload success:', data);
+
+      await this.loadAllImages();
+
+    } catch (e) {
+      console.error('Error uploading:', e);
     }
-
-    const file = this.selectedFile;
-
-    // Use the original behavior: upload using its actual filename
-    const fileName = file.name;
-
-    // Step 2: Upload to Supabase
-    const { data, error } = await supabase
-      .storage
-      .from('images')            // bucket name
-      .upload(fileName, file, {
-        upsert: true
-      });
-
-    if (error) {
-      console.error('Upload failed:', error);
-      return;
-    }
-
-    console.log('Upload success:', data);
-
-    // Step 3: Get public URL
-    const { data: urlData } = supabase
-      .storage
-      .from('images')
-      .getPublicUrl(fileName);
-
-    console.log('Public URL:', urlData.publicUrl);
-
-    // Step 4: Reload all images to display the newly uploaded file
-    await this.loadAllImages();
-
-  } catch (e) {
-    console.error('Error uploading:', e);
   }
-}
 
+  // ------------------------------
+  // DELETE IMAGE
+  // ------------------------------
+  async deleteImage(imageName: string) {
+    try {
+      const { error } = await supabase
+        .storage
+        .from('images')
+        .remove([imageName]);
+
+      if (error) {
+        console.error('Delete failed:', error);
+        return;
+      }
+
+      console.log('Deleted:', imageName);
+
+      await this.loadAllImages();
+      this.closeLightbox();
+
+    } catch (e) {
+      console.error('Error deleting image:', e);
+    }
+  }
+
+  // ------------------------------
+  // LIGHTBOX + NAVIGATION
+  // ------------------------------
   prevImage() {
     this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
   }
@@ -231,17 +197,15 @@ export class LoginComponent {
     this.currentLightboxImage = (this.currentLightboxImage + 1) % this.images.length;
   }
 
-
-  // -----------------------------
-  // ✅ OPEN THE INLINE DIALOG
-  // -----------------------------
+  // ------------------------------
+  // LOGIN DIALOG
+  // ------------------------------
   openPasswordDialog() {
-    const ref = this.dialog.open(PasswordDialogComponent, {
-      width: '300px'
-    });
+    const ref = this.dialog.open(PasswordDialogComponent, { width: '300px' });
 
     ref.afterClosed().subscribe(result => {
       if (!result) return;
+
       if (result === this.password) {
         this.isLoggedIn = true;
         alert('Login successful!');
@@ -253,8 +217,9 @@ export class LoginComponent {
 }
 
 
+
 /* =======================================================
-   ✅ INLINE DIALOG COMPONENT (AOT-SAFE, SAME FILE)
+   INLINE PASSWORD DIALOG
    ======================================================= */
 
 @Component({

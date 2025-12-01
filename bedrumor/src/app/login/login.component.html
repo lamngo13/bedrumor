@@ -1,14 +1,21 @@
 <style>
-  /* Set the pink fairy cursor globally for all elements */
   HTML, BODY {
-    cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"), 
+    cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"),
            url("https://downloads.totallyfreecursors.com/thumbnails/fairypink3.gif"), auto;
   }
 
-  /* Ensure buttons and other interactive elements also have the custom cursor when hovered */
   button, a {
-    cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"), 
+    cursor: url("https://downloads.totallyfreecursors.com/cursor_files/fairypink3.ani"),
            url("https://downloads.totallyfreecursors.com/thumbnails/fairypink3.gif"), auto;
+  }
+
+  /* Centered delete button over image */
+  .delete-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
   }
 </style>
 
@@ -24,14 +31,14 @@
   <div class="gallery-header">
     <button *ngIf="isLoggedIn" class="home-button" (click)="genupload()">UPLOAD IMAGE</button>
     <input 
-    type="file" 
-    #fileInput 
-    style="display:none" 
-    accept="image/*"
-    (change)="onFileSelected($event)"
-  >
+      type="file" 
+      #fileInput 
+      style="display:none" 
+      accept="image/*"
+      (change)="onFileSelected($event)"
+    >
   </div>
-  
+
   <!-- Gallery Grid -->
   <div class="gallery-grid">
     <div 
@@ -39,19 +46,29 @@
       class="gallery-item"
       (click)="openLightbox(i)"
     >
-      <img [src]="image" [alt]="'Gallery Image ' + (i + 1)">
+      <img [src]="image.url" [alt]="image.name">
     </div>
   </div>
 
   <!-- Lightbox Modal -->
   <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
     <div class="lightbox-content" (click)="$event.stopPropagation()">
+
+      <!-- DELETE BUTTON (only if logged in) -->
+      <div *ngIf="isLoggedIn" class="delete-button-container">
+        <button 
+          class="home-button"
+          (click)="deleteImage(images[currentLightboxImage].name)">
+          DELETE
+        </button>
+      </div>
+
       <button class="lightbox-close" (click)="closeLightbox()">&times;</button>
       <button class="lightbox-arrow lightbox-prev" (click)="prevLightboxImage()">&#10094;</button>
       
       <img 
-        [src]="images[currentLightboxImage]" 
-        [alt]="'Gallery Image ' + (currentLightboxImage + 1)"
+        [src]="images[currentLightboxImage].url"
+        [alt]="images[currentLightboxImage].name"
       >
       
       <button class="lightbox-arrow lightbox-next" (click)="nextLightboxImage()">&#10095;</button>
