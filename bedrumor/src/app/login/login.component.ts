@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { supabase } from '../supabase.service';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -137,6 +136,7 @@ export class LoginComponent {
           //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/fp/fpp.json 400 (Bad Request)
           
           //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/unnamed%20(17).jpg
+          //https://wlzjjwoawqfixjqwdrfc.supabase.co/storage/v1/object/public/images/logo1.jpg
           //this is reference from images and it works
           
           console.log('PASSWORD LOADED:', password);
