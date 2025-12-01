@@ -22,6 +22,7 @@ export class LoginComponent {
   images = [
     'assets/img/logo1.jpg',
     'assets/img/unnamed (14).jpg',
+    //these shouldn't be displayed, but are a placeholder
   ];
 
   currentImage = 0;
@@ -35,12 +36,63 @@ export class LoginComponent {
     public dialog: MatDialog
   ) {}
 
+  ngOnInit() {
+    this.loadAllImages();
+    }
+  
   ngOnDestroy() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '';
   }
 
   goHome() { this.router.navigate(['/home']); }
   goLogin() { this.router.navigate(['/login']); }
+
+  getImages() {
+    //get images from supabse, and rewrite them to this.images
+  }
+
+  async loadAllImages() {
+  try {
+    // Step 1: List all files in the bucket
+    const { data: files, error } = await supabase
+      .storage
+      .from('images')
+      .list('', {
+        limit: 1000,
+        offset: 0
+      });
+
+    if (error) {
+      console.error('Failed to list images:', error);
+      return;
+    }
+
+    if (!files) {
+      console.error('No files returned.');
+      return;
+    }
+
+    // Step 2: Convert each file entry into a public URL
+    const imageUrls = files
+      .filter(f => !f.name.endsWith('/')) // ignore folder entries
+      .map(f => {
+        const { data } = supabase
+          .storage
+          .from('images')
+          .getPublicUrl(f.name);
+
+        return data.publicUrl;
+      });
+
+    // Step 3: Store into your component's array
+    this.images = imageUrls;
+
+    console.log('Loaded images:', this.images);
+
+  } catch (e) {
+    console.error('Error loading images:', e);
+  }
+}
 
   tryLogin() {
     const userInput = (document.getElementById('passwordInput') as HTMLInputElement).value;
@@ -143,6 +195,9 @@ export class LoginComponent {
       .getPublicUrl(fileName);
 
     console.log('Public URL:', urlData.publicUrl);
+
+    // Step 4: Reload all images to display the newly uploaded file
+    await this.loadAllImages();
 
   } catch (e) {
     console.error('Error uploading:', e);
