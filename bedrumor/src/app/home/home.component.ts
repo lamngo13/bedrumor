@@ -130,23 +130,7 @@ export class HomeComponent {
     }
   }
 
-   fetchLatestVideo() {
-    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${this.channelId}&key=${this.apiKey}`;
 
-    this.http.get<any>(channelUrl).subscribe(channelRes => {
-      const uploadsPlaylistId =
-        channelRes.items[0].contentDetails.relatedPlaylists.uploads;
-
-      const playlistUrl =
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${this.apiKey}`;
-
-      this.http.get<any>(playlistUrl).subscribe(videoRes => {
-        this.latest_vid_id = videoRes.items[0].snippet.resourceId.videoId;
-        console.log("latest_vid_id loaded inside call:", this.latest_vid_id); // <-- this is the real one
-      });
-    });
-  }
-  //end fetchLatestVideo
   zfetchLatestVideo() {
   console.log("ai slop for youtube api w error handling");
 

@@ -46,6 +46,11 @@ export class SecondComponent {
       this.router.navigate(['/home']);
     }
 
+    goLogin() {
+      console.log('login');
+      this.router.navigate(['/login']);
+    }
+
     prevImage() {
       this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
     }
