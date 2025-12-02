@@ -17,8 +17,8 @@ export class LoginComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   isLoggedIn = false;
-  password = "bruh";
-  temppassword = "yeet";
+  password = "fp";
+  temppassword = "fp";
 
   // NOW stores both filename + URL
   images: { name: string; url: string }[] = [

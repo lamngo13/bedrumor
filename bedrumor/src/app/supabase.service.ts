@@ -5,6 +5,6 @@ const newsupakey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 //^ use this one, but make sure to put it in gh env vars
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsempqd29hd3FmaXhqcXdkcmZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1MDY1NjUsImV4cCI6MjA4MDA4MjU2NX0.zMJlHWJ1XZ1hfr_7FaDHaboF1FrOJgM_9Rbg3e6OR1I'
 
-export const supabase = createClient(supabaseUrl, newsupakey, {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: { persistSession: false, detectSessionInUrl: false },
 });
