@@ -286,6 +286,14 @@ export class HomeComponent {
     window.open('https://poki.com/en/g/the-impossible-quiz-2', '_blank');
   }
 
+  openYouTubeLink(videoId: string, event: Event) {
+    if (this.isMobile) {
+      event.preventDefault();
+      window.location.href = `youtube://${videoId}`;
+    }
+    // On desktop, the href will handle the navigation
+  }
+
   toggleLangugae() {  
     console.log('toggleLangugae');
     if (this.language === 'en') {

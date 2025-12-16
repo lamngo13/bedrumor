@@ -172,7 +172,9 @@ body, html {
   display: block;
   margin: 0 auto;
   object-fit: contain;
+  cursor: pointer;
 }
+
 
 .album-links {
   display: flex;

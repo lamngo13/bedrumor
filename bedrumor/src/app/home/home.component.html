@@ -72,9 +72,9 @@
       </div>
 
       <div class="album-links">
-        <a href="https://open.spotify.com/album/6TjhZBF4MKIPszmD0mzbf0?si=JGSoxNo8QBeSNjK--Wkq9w" target="_blank">listen on spotify</a>
-        <a href="https://music.apple.com/us/album/almost-normal-ep/1860430937" target="_blank">listen on apple music</a>
-        <a href="https://www.youtube.com/watch?v=duJyQX8hQm8" target="_blank">youtube</a>
+        <a href="https://open.spotify.com/album/6TjhZBF4MKIPszmD0mzbf0?si=JGSoxNo8QBeSNjK--Wkq9w" target="_blank">spotify</a>
+        <a href="https://music.apple.com/us/album/almost-normal-ep/1860430937" target="_blank">apple music</a>
+        <a (click)="openYouTubeLink('duJyQX8hQm8', $event)" [href]="isMobile ? 'javascript:void(0)' : 'https://www.youtube.com/watch?v=duJyQX8hQm8'" target="_blank">youtube</a>
       </div>
     </div>
 
