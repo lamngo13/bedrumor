@@ -99,8 +99,8 @@ body, html {
 .mother-hands-title {
   text-align: center;
   padding: 0;
-  margin-bottom: 2vh;
-  font-size: 2rem;
+  margin-bottom: 4vh;
+  font-size: 4rem;
   font-weight: lighter;
   color: rgb(121, 55, 115);
 }
@@ -140,6 +140,60 @@ body, html {
   max-width: 400px;
 }
 
+/* Album/EP Section */
+.album-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 5vh auto;
+  text-align: center;
+}
+
+.album-title {
+  text-align: center;
+  padding: 0;
+  margin-bottom: 4vh;
+  font-size: 4rem;
+  font-weight: lighter;
+  color: rgb(121, 55, 115);
+}
+
+.album-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+
+.album-image {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.album-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3vw;
+  margin-top: 3vh;
+}
+
+.album-links a {
+  color: #85C1E9;
+  text-decoration: none;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.album-links a:hover {
+  text-decoration: underline;
+}
+
 /* Socials */
 .socials-container {
   text-align: center;
@@ -149,16 +203,17 @@ body, html {
 
 .socials-links {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2vh;
+  justify-content: center;
+  gap: 3vw;
 }
 
 .socials-links a {
   color: #85C1E9;
   text-decoration: none;
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 2rem;
 }
 
 .socials-links a:hover {
@@ -368,6 +423,47 @@ body, html {
     max-width: 250px;
   }
 
+  /* Album section - centered and responsive */
+  .album-container {
+    width: 95%;
+    margin: 4vh auto;
+  }
+
+  .album-title {
+    text-align: center;
+    padding-right: 0;
+    font-size: 1.5rem;
+    margin-bottom: 2vh;
+  }
+
+  .album-wrapper {
+    width: 100%;
+  }
+
+  .album-image {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .album-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vw;
+    margin-top: 2vh;
+    flex-wrap: wrap;
+  }
+
+  .album-links a {
+    display: block;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
   /* Socials - centered */
   .socials-container {
     text-align: center;
@@ -377,15 +473,17 @@ body, html {
 
   .socials-links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 2vh;
+    justify-content: center;
+    gap: 3vw;
+    flex-wrap: wrap;
   }
 
   .socials-links a {
     display: block;
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   /* Events calendar - centered and responsive */
